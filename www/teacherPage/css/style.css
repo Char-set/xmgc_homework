@@ -1,0 +1,100 @@
+.clear{clear: both;}
+html, body{
+    font-family: 'Open Sans', sans-serif;
+    background: #F3F3F3;
+    font-size: 100%;
+}
+body a{
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+}
+.header {
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background: url(../images/backgroundimage.jpg)no-repeat center top;
+    background-size: 100% 100%;
+    padding:16% 0 0 0;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position: center;
+}
+.header-text{
+    background:rgba(151, 85, 209, 0.47);
+    width:48%;
+    padding:2%;
+    border-bottom:5px solid #9755d1;
+}
+.header-text h1{
+    color:#fff;
+    font-size:3.6em;
+    text-shadow: -1px 0px 1px rgba(214, 214, 214, 0.59);
+    -webkit-text-shadow: -1px 0px 1px rgba(214, 214, 214, 0.59);
+    -moz-text-shadow: -1px 0px 1px rgba(214, 214, 214, 0.59);
+    -o-text-shadow: -1px 0px 1px rgba(214, 214, 214, 0.59);
+    text-transform:uppercase;
+    font-family: 'Open Sans Condensed', sans-serif;
+    margin:0;
+}
+.header-text h2{
+    color: #FFF;
+    font-size: 1.7em;
+    text-shadow: -1px 0px 1px rgba(214, 214, 214, 0.59);
+    -webkit-text-shadow: -1px 0px 1px rgba(214, 214, 214, 0.59);
+    -moz-text-shadow: -1px 0px 1px rgba(214, 214, 214, 0.59);
+    -o-text-shadow: -1px 0px 1px rgba(214, 214, 214, 0.59);
+    text-transform: uppercase;
+    font-weight: 100;
+    margin: 10px 0 5px 0;
+}
+.header-text p{
+    color:#fff;
+    font-size:0.85em;
+    line-height:1.5em;
+    font-weight:100;
+    width:80%;
+    margin-bottom:5%;
+}
+.banner_btn{
+    text-align:center;
+}
+.banner_btn a{
+    background: none;
+    font-size: 1em;
+    padding:9px 30px;
+    color: #FFF;
+    cursor: pointer;
+    outline: none;
+    -webkit-appearance: none;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    font-weight: 100;
+    border-radius:5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius:5px;
+    -o-border-radius:5px;
+    border: 1px solid #FFF;
+}
+.banner_btn a:hover{
+    background:rgba(255, 255, 255, 0.35);
+    color:#000;
+    text-decoration: none;
+}
+.header-arrow{
+    text-align:center;
+    padding:16% 0 5% 0;
+}
+.header-arrow a span {
+    width:209px;
+    height: 50px;
+    display: inline-block;
+    background: url(../images/img-sprite.png) no-repeat 0px 0px;
+    vertical-align: middle;
+}

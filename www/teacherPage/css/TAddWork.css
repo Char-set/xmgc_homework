@@ -1,0 +1,27 @@
+*{margin:0;padding:0;}
+.user_container{position:relative;top:50px;}
+.title {
+    color:white;
+}
+.drawer-li{
+    margin-top: 20px;
+    background-color: rgba(255,255,255,0.1);
+    height: 40px;
+    border: none;
+    color:white;
+}
+.drawer-li a{
+    color:white;
+}
+._nav{
+    min-height: 40px;!important;
+    width: 100%;
+    background-color: rgba(255,255,255,0.1);
+    line-height: 40px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    /*text-align: center;*/
+    display: inline-block;
+    margin: 0;
+}

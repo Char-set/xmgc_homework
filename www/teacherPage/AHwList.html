@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			font-size: 14px;
+			font-weight: bold
+		}
+	</style>
+	<title>作业列表管理页面</title>
+</head>
+
+<body ng-controller="WorkList">
+	<div class="panel-heading">
+		<h3 class="animated lightSpeedIn"><span class="glyphicon glyphicon-book"></span> 作业管理</h3>
+	</div>
+	<center>
+		<div style="float:right">
+
+			<pagination ng-change="pageChange()" ng-model="currentPage" total-items="length" max-size="maxSize" boundary-links="true">
+			</pagination>
+
+		</div>
+	</center>
+
+
+
+	<table id="thispage" class="table table-bordered table-hover table-responsive" style="margin: 0 auto;text-align: center">
+		<thead>
+			<tr>
+				<td>作业编号</td>
+				<td>作业名称</td>
+				<td>执行操作</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="(k,v) in filteredLists" ng-show="v.wid!=0">
+				<td ng-bind="v.wid" id="v.wid"></td>
+				<td ng-bind="v.title"></td>
+				<td>
+					<div class="btn btn-warning" ng-click="delete(v.wid)">删除</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<div ng-click='back()' class="btn btn-info pull-right" style="margin-top:7px;margin-right:25px;">返回</div>
+	<div style="width:100%;" ng-include='$root.alerturl'></div>
+	<script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script src="//cdn.bootcss.com/angular.js/1.4.3/angular.min.js"></script>
+	<script src="//cdn.bootcss.com/angular-ui-bootstrap/0.13.3/ui-bootstrap-tpls.min.js"></script>
+	<!--	载入是否登录验证-->
+	<script src="js/check.js"></script>
+	<script src="js/AHwList.js"></script>
+</body>
+
+</html>

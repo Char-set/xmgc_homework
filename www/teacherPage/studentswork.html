@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='app'>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, height=device-height,initial-scale=1">
+	<title>HTML作业</title>
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/studentswork.css">
+</head>
+
+<body style="background: url('images/bg2.jpg') no-repeat center fixed;background-size: 100% 100%">
+	<nav class="nav navbar center-block _nav " style="background-color: rgba(255,255,255,0.2);height: 40px;position: absolute;">
+		<!--顶部按钮-->
+		<span class="btn glyphicon glyphicon-align-justify" style="color: white" id='pull' data-toggle="modal" data-target=".bs-example-modal-lg"></span>
+		<div style="color:white;margin: 0 auto;width: 100px;display: inline-block;line-height: 40px">
+			<h4>发布作业</h4></div>
+	</nav>
+	<div class="container" style="width:94%;background-color:rgba(255,255,255,0.2);margin-bottom:30px;margin-top: 60px;margin-left:3%;position: absolute;z-index: 50;font-size:13px;">
+		<h4 style="float:left;">待批改：</h4>
+		<table class="table" style="overflow: hidden;white-space: nowrap;text-overflow: clip;">
+			<thead>
+				<tr>
+					<th>题目名称</th>
+					<th>提交者</th>
+					<th>提交时间</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Bootstrapt练习</td>
+					<td>
+						<div style="width:50px;">小煞笔</div>
+					</td>
+					<td>2016-09-22</td>
+					<td>
+						<a href="">
+							<div class="btn btn-primary checkIt">批改</div>
+						</a>
+					</td>
+				</tr>
+				<tr>
+					<td>Bootstrapt练习</td>
+					<td>小傻逼</td>
+					<td>2016-09-22</td>
+					<td>
+						<a href="">
+							<div class="btn btn-primary checkIt">批改</div>
+						</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div style="position:fixed;z-index:150" ng-include="$root.navurl"></div>
+	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<script src="//cdn.bootcss.com/angular.js/1.3.20/angular.min.js"></script>
+	<!--	载入是否登录验证-->
+	<script src="js/check.js"></script>
+	<script src="js/studentswork.js"></script>
+</body>
+
+</html>

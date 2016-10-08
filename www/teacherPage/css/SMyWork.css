@@ -1,0 +1,93 @@
+/*.contain{*/
+
+
+/*position: absolute;*/
+
+
+/*}*/
+
+body {
+    /*padding-top: 45px;*/
+}
+
+._nav {
+    min-height: 40px;
+    !important;
+    width: 100%;
+    background-color: rgba(1, 133, 128, 0.2);
+    text-align: center;
+    line-height: 40px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.worklist {
+    /*margin-top: 10%;*/
+}
+
+#myDiv a {
+    color: white;
+}
+
+._nav {
+    min-height: 40px;
+    !important;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    line-height: 40px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    /*text-align: center;*/
+    display: inline-block;
+    margin: 0;
+}
+
+.worklist li {
+    background-color: rgba(255, 255, 255, 0);
+    font-size: 12px;
+    text-align: center;
+    line-height: 40px;
+    border: none;
+    border-top: 1px solid white;
+    margin: 5px 2%;
+    padding: 0;
+    clear: both;
+}
+
+.worklist li p {
+    width: 32%;
+    float: left;
+    margin: 0;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+    color: white;
+}
+
+#myDiv1 {
+    width: 45%;
+    height: 100px;
+    line-height: 100px;
+    float: left;
+    background-color: rgba(255, 255, 255, 0.1);
+    font-size: 18px;
+    text-align: center;
+    vertical-align: middle;
+    border: none;
+    margin: 15px 6% 15px 2%;
+}
+
+.myDiv2 {
+    width: 45%;
+    height: 46px;
+    background-color: rgba(255, 255, 255, 0.1);
+    line-height: 46px;
+    float: left;
+    font-size: 18px;
+    text-align: center;
+    border: none;
+    padding: 0;
+    !important;
+}

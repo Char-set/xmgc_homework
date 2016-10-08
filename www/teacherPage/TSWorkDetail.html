@@ -1,0 +1,18 @@
+<article ng-controller="datacontroller" style="margin-top:100px;">
+	<div class="panel panel-default1" id="mypanel">
+		<div class="panel-body">
+			<p ng-bind="workinfo.content"></p>
+		</div>
+		<ul class="list-group">
+			<li class="list-group-item">课程章节：<span ng-bind="workinfo.cname"></span> 第 <span ng-bind="workinfo.section"></span> 章</li>
+			<li class="list-group-item">发布人&nbsp;&nbsp;&nbsp;：<span ng-bind="workinfo.xname"></span></li>
+			<li class="list-group-item">发布时间：<span ng-bind="workinfo.creatdate"></span></li>
+			<li class="list-group-item">截止提交：<span ng-bind="workinfo.enddate"></span></li>
+			<li class="list-group-item" id="annex">附件：
+				<a href="{{workinfo.annex}}"><span class="glyphicon glyphicon-file"></span></a>
+			</li>
+			<li class="list-group-item">备注：<span ng-bind="workinfo.mark"></span></li>
+		</ul>
+	</div>
+</article>
+<script src="js/TSWorkDetail.js"></script>

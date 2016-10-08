@@ -1,0 +1,84 @@
+<style>
+	.li {
+		background-color: white;
+		border: none;
+		line-height: 30px;
+		!important;
+	}
+
+	.myLi {
+		display: inline-block;
+		margin: 20px 10px 0 10px;
+		color: white;
+		font-size: 14px;
+		text-align: center;
+	}
+
+	.myLi span {
+		margin: 15px 0 0 0
+	}
+</style>
+<div ng-controller="myCtrl1" style="margin-bottom:30px;margin-top:100px;">
+	<div class="ylcon" style="width:100%;color:black;" ng-click="back()">
+		<div class="story" ng-repeat="(key,val) in obj" data-toggle="modal" data-target="#myModal" ng-click="select()" style="color:white;margin-bottom:10px;{{val.bg}}">
+			<div class="opbtn"></div>
+			<span class="story_time">{{val.creatdate}}</span>
+			<span style="float:right">{{val.timbs}}</span>
+			<span class="glyphicon glyphicon-thumbs-up" style="color:white;float:right;" ng-click="timbs()"></span>
+			<p class="story_t"><small>{{val.nick}}</small></p>
+			<p class="story_m">{{val.content}}</p>
+		</div>
+		<div class="row" style="position:fixed;left:0;right:0;bottom:0;height:35px;background:#104766;
+;">
+			&nbsp; <span class="glyphicon glyphicon-pencil col-xs-1" style="color:#e5e5e5;margin-left:10px;margin-top:10px;"></span>
+			<input class="col-xs-8" type="text" value="写评论" id="input" style='padding-left:5px;outline:none;padding:0;color:white;background-color:rgba(255,255,255,0);border-left:0px;border-top:0px;border-right:0px;border-bottom:1px solid white;margin-top:10px;'>
+			<span class="btn btn-default col-xs-2" style="margin-top:10px;color:white;background-color:rgba(255,255,255,0.2);padding:0;margin-left:5px;" ng-click="fabu()">发布</span>
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade bs-example-modal-sm text-center" id="myModal" myAttr="" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" style="top:220px;">
+			<div class="modal-content">
+				<ul class="list-group" style="color:#c3c3c3;margin-bottom:0;">
+					<li class="li" ng-click="answer()">回复评论</li>
+					<li class="li" ng-click="share()">分享评论</li>
+					<li class="li">复制评论</li>
+					<li class="li">举报评论</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div id="myDiv2" ng-click="back()" style="padding: 0;position:fixed;bottom: 0;z-index: 99;display: none;width:100%;height:646px;"></div>
+	<div id="myDiv" style="width:100%;height:100px;background: url('images/blli.jpg') 0 100px;position:fixed;bottom:0;left:0;z-index:100;display: none">
+		<ul>
+			<li class="myLi">
+				<a href="http://openapi.qzone.qq.com/oauth/qzoneoauth_authorize?oauth_consumer_key=222011&oauth_token=16737615709618344191&oauth_callback=http%3A%2F%2Fwww.paidai.com%2Fuser%2Foauth_qq.php%3Fstep%3D4%26secret%3DREpdMCDC2pInc5pa">
+					<img src="images/qq.jpg" width='50px' height="50px" />
+				</a>
+				<br />
+				<span>qq</span>
+			</li>
+			<li class="myLi">
+				<a href="https://mp.weixin.qq.com/"><img src="images/weixin.jpg" width='50px' height="50px" /></a>
+				<br />
+				<span>微信</span>
+			</li>
+			<li class="myLi">
+				<a href="https://passport.weibo.cn/signin/welcome?entry=mweibo&r=http%3A%2F%2Fpad.weibo.cn%2F&_T_WM=669231e591d5c024d7ca7bbb1ab1b0e9">
+					<img src="images/weibo.jpg" width='50px' height="50px" />
+				</a>
+				<br />
+				<span>微博</span>
+			</li>
+			<li class="myLi">
+				<a href="http://qzone.qq.com/"><img src="images/qzone.jpg" width='50px' height="50px" /></a>
+				<br />
+				<span>qq空间</span>
+			</li>
+		</ul>
+	</div>
+	<div style="width:100%;" ng-include='$root.alerturl'></div>
+</div>
+<script src="js/TChat.js"></script>

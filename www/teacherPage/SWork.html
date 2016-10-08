@@ -1,0 +1,21 @@
+<article ng-controller='datacontroller' style="margin-top:100px;">
+	<div class="panel panel-default1" id="mypanel">
+		<div class="panel-body">
+			<p ng-bind='workinfo.content'></p>
+		</div>
+		<ul class="list-group">
+			<li class="list-group-item">课程章节：<span>{{workinfo.cname}}第{{workinfo.section}}章</span></li>
+			<li class="list-group-item">发布人&nbsp;&nbsp;&nbsp;：<span ng-bind='workinfo.xname'></span></li>
+			<li class="list-group-item">发布时间：<span ng-bind='workinfo.creatdate'></span></li>
+			<li class="list-group-item">截止提交：<span ng-bind='workinfo.enddate'></span></li>
+			<li class="list-group-item" id="annex">附件：
+				<a href="{{workinfo.annex}}"><span class="glyphicon glyphicon-file"></span></a>
+			</li>
+			<li class="list-group-item">提交状态：<span id="up">未提交</span></li>
+			<li class="list-group-item">批改状态：<span id="check">未批改</span></li>
+			<li class="list-group-item">成绩&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：&nbsp;<span ng-bind='sworkinfo.score'></span></li>
+			<li class="list-group-item">教师留言：<span ng-bind='sworkinfo.tadvice'>无</span></li>
+		</ul>
+	</div>
+</article>
+<script src="js/SWork.js"></script>

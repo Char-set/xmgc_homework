@@ -1,0 +1,91 @@
+<!doctype html>
+<html ng-app='app' ng-controller='rolecontroller'>
+
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width height=device-height initial-scale=1">
+	<title>my homework</title>
+	<meta charset=utf-8>
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/TAddWork.css">
+	<style>
+		font-family: "微软雅黑";
+	</style>
+</head>
+
+<body ng-controller='text' style="background: url('images/blli1.jpg') no-repeat center fixed;background-size: 100% 100%">
+	<nav class="nav navbar center-block _nav " style="background-color: rgba(255,255,255,0.2);height: 40px;position: absolute;">
+		<!--顶部按钮-->
+		<span class="btn glyphicon glyphicon-align-justify" style="color: white" id='pull' data-toggle="modal" data-target=".bs-example-modal-lg"></span>
+		<div style="color:white;margin: 0 auto;width: 100px;display: inline-block;line-height: 40px">
+			<h4>发布作业</h4></div>
+	</nav>
+
+	<!-- 主题内容 -->
+	<div class="container" style="width:85%;background-color:rgba(255,255,255,0.2);margin-bottom:30px;margin-top: 60px;margin-left:8%;position: absolute;z-index: 50;">
+		<form role="form">
+			<div class="form-group">
+				<label for="title" class="title">标题</label>
+				<input type="text" class="form-control" id="title" placeholder="Enter title">
+			</div>
+			<div class="form-group">
+				<label for="content" class="title">内容</label>
+				<textarea class="form-control" id="content" placeholder="Content" style="height:150px;width:100%"></textarea>
+			</div>
+			<div class="form-group">
+				<label for="" class="title">课程</label>
+				<select ng-controller='class' class="form-control" style="text-align:center" name="" id="Sselect">
+					<option id='option' value="请选择" class="">请选择...</option>
+					<option ng-repeat="class in classes" value="{{class.name}}" class="">{{class.name}}</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="" class="title">章节</label>
+				<select class="form-control" name="" id="section">
+					<option value="1" class="active">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="" class="title">截止时间</label>
+				<br>
+				<input type="date" id="time" style="">
+			</div>
+			<div class="form-group">
+				<label for="mark" class="title">备注</label>
+				<input type="text" class="form-control" id="mark" placeholder="Some message">
+			</div>
+
+			<div class="form-group">
+				<label for="shangchuan" class="title">附件:</label>
+				<div id='shangchuan' class="btn btn-primary">上传文件</div>
+				<div style="width:200px;margin:12px;background:gray;border-radius: 8px;">
+					<div id='wancheng' style="background:green;width:0;border-radius: 8px;margin-left:2px;">0%</div>
+				</div>
+				<a id='wenjian' href='' style="display:none;" ng-bind='sworkinfo.annex'>....</a>
+			</div>
+
+			<div id="up" class="btn btn-primary pull-right" style="margin-bottom:15px;">
+				<span ng-click="check()">提交</span>
+			</div>
+			<button type="reset" class="btn btn-danger pull-right" style="margin-right:50px">重置</button>
+		</form>
+	</div>
+	<div style="width:100%;" ng-include='$root.alerturl'></div>
+	<div style="position:fixed;z-index:150" ng-include="$root.navurl"></div>
+
+
+	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<script src="//cdn.bootcss.com/angular.js/1.5.8/angular.min.js"></script>
+	<script src="//cdn.bootcss.com/angular-ui-bootstrap/0.13.3/ui-bootstrap-tpls.min.js"></script>
+	<script src="js/common.js"></script>
+	<script src="js/check.js"></script>
+	<script src="js/TAddWork.js"></script>
+
+</body>
+
+</html>

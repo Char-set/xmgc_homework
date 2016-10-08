@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='app'>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1">
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/animate.min.css">
+
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			font-family: Aharoni;
+		}
+
+		#noticecontent {
+			border: black 1px solid;
+			width: 100%;
+			min-height: 100px;
+			max-height: 300px;
+			_height: 120px;
+		}
+	</style>
+	<title>管理员界面</title>
+</head>
+
+<body ng-controller='adminController'>
+	<!--顶部导航标题信息-->
+	<nav class="nav navbar navbar-fixed-top" style="background-color: #2b669a">
+		<span class="btn glyphicon glyphicon-align-justify " style="margin:10px;font-weight:bolder"> 管理员界面</span>
+	</nav>
+	<!--主体模块部分-->
+	<div style="position:relative;top:50px;" class="container" id="main">
+		<div class="row" style="margin-top:10px">
+			<div class="col-xs-6">
+				<p id="welcome" class="h4 animated rubberBand">Welcome,<span ng-bind='$root.nick'></span></p>
+			</div>
+			<div class="col-xs-6">
+				<div class="btn btn-default pull-right">
+					<a href="http://m.xmgc360.com/homework/web/">返回首页</a>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="panel panel-default  panel-primary" style="width:100%;margin-top: 50px; ">
+			<div class="panel-heading">
+				<h3 class="panel-title"><span class="glyphicon glyphicon-magnet"></span> <b>赋予身份</b></h3>
+			</div>
+			<div class="panel-body">
+				<form action="" role="form"></form>
+				<div class="col-xs-5 form-group">
+					<input id="id" type="number" class="form-control" placeholder="用户id">
+				</div>
+				<div class="col-xs-5 form-group">
+					<select name="role" id="role" class="form-control">
+						<option value="1">学生</option>
+						<option value="2">教师</option>
+						<option value="3">管理员</option>
+					</select>
+				</div>
+				<div class="col-xs-2 form-group">
+					<button ng-click='giveRole()' class="btn btn-default" style="margin-left:-6px;">确定</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="panel panel-default pull-right panel-success" style="width:100%">
+			<div class="panel-heading">
+				<h3 class="panel-title"><span class="glyphicon glyphicon-bullhorn"></span> <b>发布公告</b></h3>
+			</div>
+			<div class="panel-body" placeholder="Search for">
+				<div id="noticecontent" class="test_box" contenteditable="true"></div>
+			</div>
+			<div class="btn-group btn-group-justified">
+				<div class="btn-group">
+					<div id="publish" style="border-top-left-radius: 10px;border-bottom-left-radius: 10px" type="button" class="btn btn-default btn-primary" ng-click='check()'>发布</div>
+				</div>
+				<div class="btn-group">
+					<button id="clear" type="button" class="btn btn-default " style="border-top-right-radius: 10px;border-bottom-right-radius: 10px">清空</button>
+				</div>
+			</div>
+
+		</div>
+		<!--数据统计显示区，显示本模块的数据-->
+		<div class="panel panel-default pull-right panel-info" style="width:100%">
+			<div class="panel-heading">
+				<h3 class="panel-title"><span class="glyphicon glyphicon-list-alt"></span> <b>数据统计</b></h3>
+			</div>
+			<div class="panel-body animated rotateInDownLeft">
+				<div class="row">
+					<div class="col-xs-6">
+						总计作业数：<span>{{number4}}</span> 篇.
+					</div>
+					<div class="col-xs-6">
+						老师数量：
+						<span>{{number1}}</span> 名.
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-6">
+						学生数量：
+						<span>{{number3}}</span> 名.
+					</div>
+					<div class="col-xs-6">
+						讨论区条数：
+						<span>{{number2}}</span> 条.
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--作业的修改主要是增加分类，删除过期作业-->
+		<a></a>
+		<div class="panel panel-default pull-right panel-warning" style="width:100%;">
+			<div class="panel-heading">
+				<h3 class="panel-title"><span class="glyphicon glyphicon-book"></span> <a href="AHwList.html"> <b>作业管理</b></a></h3>
+			</div>
+		</div>
+		<!--删除不当言论，或者定期清除-->
+		<div class="panel panel-default pull-right panel-danger" style="width:100%">
+			<div class="panel-heading">
+				<h3 class="panel-title"><span class="glyphicon glyphicon-pencil"></span> <a href="Adiscuss.html"> <b>讨论区管理</b></a></h3>
+			</div>
+
+		</div>
+	</div>
+	<div style="width:100%;" ng-include='$root.alerturl'></div>
+	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<script src="//cdn.bootcss.com/angular.js/1.3.20/angular.min.js"></script>
+	<script src="//cdn.bootcss.com/angular-ui-bootstrap/0.13.3/ui-bootstrap-tpls.min.js"></script>
+	<!--	载入是否登录验证-->
+	<script src="js/check.js"></script>
+	<script src="js/Aindex.js"></script>
+
+</body>
+
+</html>
