@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='app' ng-controller='rolecontroller'>
+
+<head>
+	<meta charset="UTF-8">
+	<title>作业库</title>
+	<meta name="viewport" content="width=device-width height=device-height initial-scale=1">
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+	<link href="//cdn.bootcss.com/Swiper/3.3.1/css/swiper.min.css" rel="stylesheet">
+	<style>
+		* {
+			font-family: '宋体';
+			font-size: 12px;
+		}
+
+		table {
+			table-layout: fixed;
+		}
+
+		td {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: clip;
+		}
+
+		._nav {
+			min-height: 40px;
+			!important;
+			width: 100%;
+			background-color: rgba(255, 255, 255, 0.1);
+			line-height: 40px;
+			color: white;
+			font-size: 20px;
+			font-weight: bold;
+			/*text-align: center;*/
+			display: inline-block;
+			margin: 0;
+		}
+
+		a {
+			color: white;
+		}
+	</style>
+</head>
+
+<body >
+<div id='bg' style="position:fixed;height:100%;width:100%;z-index:-1;background: url('images/blli.png') no-repeat;background-size: 100%;"></div>
+	<nav style="background-color: rgba(255,255,255,0.2);height: 40px;position:absolute;width:100%;background-size:100%;">
+		<!--顶部按钮-->
+		<span class="btn glyphicon glyphicon-align-justify" style="color: white;top:-4px;" id='pull'></span>
+		<div style="color:white;margin: 0 auto;width: 100px;display: inline-block;line-height: 40px">
+			<h4>作业库</h4></div>
+	</nav>
+	<div ng-controller='hwrescontroller' class="panel panel-info" style="clear: both;width: 90%;margin: 0 auto;position:absolute;top:55px;left:5%;background:none;border:none;">
+		<div class="form-group" style="margin-bottom:0;height:35px;">
+			<div class="col-xs-4"></div>
+			<div class="col-xs-3"></div>
+			<div class="col-xs-5">
+				<input id='query' type="text" class="form-control" ng-model="query" ng-change="pull()" placeholder="查询" style="font-size:12px;text-align:center">
+			</div>
+		</div>
+		<table class="table text-center" style="overflow: hidden;color:white;margin-top:30px;">
+			<col style="width: 25%" />
+			<col style="width: 25%" />
+			<col style="width: 20%" />
+			<col style="width: 30%" />
+			<thead>
+				<tr>
+					<td><b style="font-size: 14px;">作业标题</b></td>
+					<td><b style="font-size: 14px;">课程</b></td>
+					<td><b style="font-size: 14px;">发布者</b></td>
+					<td><b style="font-size: 14px;">发布时间</b></td>
+				</tr>
+			</thead>
+		</table>
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide" ng-repeat='item in Length' ng-init="outerIndex = $index">
+					<table class="table text-center" style="overflow: hidden;color:white;">
+						<col style="width: 25%" />
+						<col style="width: 25%" />
+						<col style="width: 20%" />
+						<col style="width: 30%" />
+						<tbody>
+							<tr ng-repeat='(key,val) in dat | filter:query' ng-init="innerIndex = $index">
+								<td style="height:40px;" ng-if='(outerIndex*10)<=innerIndex&&innerIndex<=(outerIndex*10)+9'>
+									<a href="CWorkResDetail.html?wid={{val.wid}}" style="color:white;">
+										{{val.title}}
+									</a>
+								</td>
+								<td ng-if='(outerIndex*10)<=innerIndex&&innerIndex<=(outerIndex*10)+9'>
+									{{val.cname}}
+								</td>
+								<td ng-if='(outerIndex*10)<=innerIndex&&innerIndex<=(outerIndex*10)+9'>
+									{{val.uname}}
+								</td>
+								<td ng-if='(outerIndex*10)<=innerIndex&&innerIndex<=(outerIndex*10)+9'>
+									{{val.creatdate}}
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="swiper-pagination"></div>
+		</div>
+
+	</div>
+	<div style="position:fixed;z-index:150" ng-include="$root.navurl"></div>
+	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<script src="//cdn.bootcss.com/angular.js/1.3.20/angular.min.js"></script>
+	<script src="//cdn.bootcss.com/angular-ui-bootstrap/0.13.3/ui-bootstrap-tpls.min.js"></script>
+	<script src="//cdn.bootcss.com/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
+	<!--	载入是否登录验证-->
+	<script src="js/check.js"></script>
+	<script src="js/__CWorkRes.js"></script>
+</body>
+
+</html>

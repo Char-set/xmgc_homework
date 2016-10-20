@@ -3,14 +3,18 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
 	<link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 	<style>
 		* {
 			margin: 0;
 			padding: 0;
 			font-size: 15px;
-			font-family: "Times New Roman", Times, serif;
+			font-family: "微软雅黑";
+		}
+
+		.ng-scope {
+			font-family: "微软雅黑";
 		}
 
 		.pagination>.disabled>a {
@@ -41,43 +45,57 @@
 		.popover-content {
 			word-wrap: break-word;
 		}
+
+		.dropload-refresh,
+		.dropload-update,
+		.dropload-noData,
+		.dropload-load {
+			text-align: center;
+			color: white;
+			/*
+            position: fixed;
+            z-index: 1000;
+            top: 50%;
+            left: 50%;
+*/
+		}
 	</style>
 	<title>公告列表页面</title>
 </head>
 
-<body style="background:url('images/blli1.jpg') center fixed no-repeat;background-size:100% 100%;">
-	<nav class="nav navbar center-block _nav " style="background-color: rgba(255,255,255,0.2);height: 40px;position: fixed;top:0;width:100%;color:white;">
+<body style="background: url('images/blli.png') no-repeat;background-size:cover;">
+<!--	<div id='bg' style="position:fixed;height:100%;width:100%;z-index:-1;background: url('images/blli.png') no-repeat;background-size: 100%;"></div>-->
+	<nav class="nav navbar center-block _nav " style="background-color: #3b5262;height: 40px;position: fixed;top:0;width:100%;color:white;">
 		<!--顶部按钮-->
-		<span class="btn glyphicon glyphicon-align-justify" style="color: white;margin-left:20px;margin-top:-2%;padding:0;" id='pull'></span>
-		<!--        <div style="color:white;margin: 0 auto;width: 100px;display: inline-block;height:40px;line-height: 40px">-->
-		<h4 style="display:inline-block;margin-left:2px;margin-top:5%;">公告列表</h4>
-		<!--            </div>-->
+		<span class="btn glyphicon glyphicon-align-justify" style="color: white;margin-left:20px;margin-top:-5px;padding:0;" id='pull'></span>
+		<h4 style="display:inline-block;margin-left:2px;margin-top:15px;font-family:微软雅黑 ;">公告列表</h4>
+
 	</nav>
-	<div class="container" style="margin-top:60px;" ng-controller="kzq">
+	<div class="container" style="margin-top:40px;">
 
-		<!--		</div>-->
-
-		<!--右侧可操作列表-->
-		<div style="margin-top:20px;">
-			<div ng-repeat="(k,v) in filteredNotes " class="panel" style="width: 100%;padding-left:5px;background:url('images/bj3.jpg') center fixed no-repeat;color:white;height:100px;">
-				<div class="panel-body" style="text-align: left;">
-					<p>{{v.content}}</p>
-				</div>
-				<div class="panel-footer text-right" style="height:100px;border:none;background-color:rgba(255,255,255,0)"><span>{{v.nick}}</span> &nbsp;<span>{{v.creatdate}}</span></div>
+		<div style="margin-top:20px;" class="content">
+			<div class="lists">
 			</div>
 		</div>
-		<!--顶部分页和按钮-->
-		<!--		<div style="float:right">-->
-		<div style="margin:auto 0;position:fixed;bottom:10px;left:20%;">
-			<pagination ng-model="currentPage" total-items="length" max-size="maxSize" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo" boundary-links="true" style="magin-top:50px;">
-			</pagination>
-		</div>
+
 	</div>
+
+
+
+
+	<!--    回顶部图标-->
+	<div style="position:fixed; z-index:0;bottom:20px;right:20px;color:white;text-align:center;display:none" id="gotop" onclick="gotop()">
+		<img src="images/gotop1.png"></div>
+
+
+
+
 	<div style="position:fixed;z-index:150" ng-include="$root.navurl"></div>
 	<script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
 	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script src="//cdn.bootcss.com/angular.js/1.4.3/angular.min.js"></script>
 	<script src="//cdn.bootcss.com/angular-ui-bootstrap/0.13.3/ui-bootstrap-tpls.min.js"></script>
+	<script src="js/dropload.js"></script>
 	<script src="js/check.js"></script>
 	<script src="js/CNoteList.js"></script>
 </body>

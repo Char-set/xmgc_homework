@@ -3,18 +3,14 @@
 	<form role="form" style='padding-bottom:50px;background:white;border-radius:7px;'>
 		<div class="form-group col-xs-12" style="margin-top:25px;">
 			<lable>请填写你的答案：</lable>
-			<textarea id='answer' style='margin-top:15px;height:300px;' class="form-control" ng-bind='sworkinfo.answer' rows="3" placeholder="作业答案...">
+			<textarea id='answer' style='margin-top:15px;height:300px;resize:none;' class="form-control" ng-bind='sworkinfo.answer' maxlength="1000" rows="3" placeholder="作业答案...">
 
 			</textarea>
 		</div>
 		<div class="form-group">
-			&nbsp; &nbsp;
-			<label for="shangchuan" class="title">附件:</label>
-			<div id='shangchuan' class="btn btn-primary">上传文件</div>
-			<div style="width:200px;margin:12px;background:gray;border-radius: 8px;">
-				<div id='wancheng' style="background:green;width:0;border-radius: 8px;margin-left:2px;">0%</div>
-			</div>
-			<a id='wenjian' href='' style="display:none;" ng-bind='sworkinfo.annex'>....</a>
+			<label for="shangchuan" class="title" style="margin-left:15px;">附件:</label>&nbsp;
+			<a id='wenjian' href='{{sworkinfo.annex}}'>{{sworkinfo.filename}}</a>
+			<div id='shangchuan' class="btn btn-primary pull-right btn-xs" ng-click='shangchuan()' style="margin-right:15px;">更新文件</div>
 		</div>
 		<div id="up" class="btn btn-primary pull-right" style="margin-bottom:15px;margin-right:5px;">
 			<span ng-click="update()">提交</span>

@@ -4,21 +4,22 @@
 <head>
 	<meta charset="UTF-8">
 	<title>批改作业</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
 	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
 	<style>
 		* {
-			font-family: "微软雅黑";
-			font-size: 14px;
+			font-family: "宋体";
+			font-size: 13px;
 		}
 	</style>
 </head>
 
-<body style="background: url('images/blli1.jpg') no-repeat center fixed;background-size: 100% 100%;position:relative;" ng-controller="checkWork">
+<body ng-controller="checkWork">
+	<div id='bg' style="position:fixed;height:100%;width:100%;z-index:-1;background: url('images/blli1.jpg') no-repeat;background-size: 100%;"></div>
 	<!-- 顶部按钮-->
-	<nav class="nav navbar center-block _nav " style="background-color: rgba(255,255,255,0.2);height: 40px;position: absolute;width:100%">
+	<nav class="nav navbar center-block _nav " style="background-color: rgba(255,255,255,0.2);min-height: 40px;position: absolute;width:100%">
 		<!--顶部按钮-->
-		<span class="btn glyphicon glyphicon-align-justify" style="color: white" id='pull'></span>
+		<span class="btn glyphicon glyphicon-align-justify" style="color: white;top: -4px;" id='pull'></span>
 		<div style="color:white;margin: 0 auto;width: 100px;display: inline-block;line-height: 40px">
 			<h4>作业批改</h4></div>
 	</nav>
@@ -38,28 +39,28 @@
 			</div>
 			<div class="form-group">
 				<label for="content">内容：</label>
-				<textarea class="form-control" id="content" disabled placeholder="Content" style="height:80px" ng-bind="workinfo.answer"></textarea>
+				<textarea class="form-control" id="content" disabled placeholder="Content" style="height:120px;resize:none" ng-bind="workinfo.answer"></textarea>
 			</div>
 			<div class="form-group">
 				<p class="panel-title">
 					<label>查看文件：</label>
-					<a href="{{workinfo.annex}}"><i><span class="glyphicon glyphicon-file"></span></i></a></p>
-				<div class="form-group">
-					<p class="panel-title">
-						<label>提交日期：</label><span ng-bind="workinfo.creatdate"></span></p>
-				</div>
-				<div class="form-group">
-					<label>评分：</label>
-					<br>
-					<input value='{{workinfo.score}}' type="number" class="form-control" id="score" style=" width:100%;display:inline-block;text-align:center">
-				</div>
-				<div class="form-group">
-					<label>建议：</label>
-					<textarea class="form-control" id="comment" placeholder="Content" style="height:80px">{{workinfo.tadvice}}</textarea>
-				</div>
-				<div type="submit" class="btn btn-primary pull-right" style="margin-bottom:15px;" ng-click="saveIt()">保存</div>
-				<div type="reset" class="btn btn-danger pull-right" value="取消" style="margin-right:50px" ng-click='back()'>取消</div>
+					<a id='wenjian' href='{{workinfo.annex}}'>{{workinfo.filename}}</a>
 			</div>
+			<div class="form-group">
+				<p class="panel-title">
+					<label>提交日期：</label><span ng-bind="workinfo.creatdate"></span></p>
+			</div>
+			<div class="form-group">
+				<label>评分：</label>
+				<br>
+				<input value='{{workinfo.score}}' type="number" class="form-control" id="score" style=" width:100%;display:inline-block;text-align:center" maxlength="2">
+			</div>
+			<div class="form-group">
+				<label>建议：</label>
+				<textarea class="form-control" id="comment" placeholder="Content" maxlength="100" style="height:100px;resize:none">{{workinfo.tadvice}}</textarea>
+			</div>
+			<div type="submit" class="btn btn-primary pull-right" style="margin-bottom:15px;" ng-click="saveIt()">保存</div>
+			<div type="reset" class="btn btn-danger pull-right" value="取消" style="margin-right:50px" ng-click='back()'>取消</div>
 		</form>
 	</div>
 	<div style="width:100%;" ng-include='$root.alerturl'></div>

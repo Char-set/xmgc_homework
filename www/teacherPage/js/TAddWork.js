@@ -1,6 +1,6 @@
 //	附件上传
 $('#shangchuan').click(function () {
-	_fns.uploadFile2($('#shangchuan'), function (f) {
+	_fns.uploadFile2(2, $('#shangchuan'), function (f) {
 		console.log('>>>>before:', f);
 	}, function (f) {
 		console.log('>>>>progressAAAA:', f);
@@ -9,8 +9,14 @@ $('#shangchuan').click(function () {
 		console.log('>>>>>AAAA');
 	}, function (f) {
 		console.log('>>>>successXXXX:', f);
-		$('#wenjian').html(f.url);
+		$('#wenjian').html(f.name);
 		$('#wenjian').attr('href', f.url);
+		$('#jindu').css({
+			display: 'none'
+		});
+		$('#wenjian').css({
+			display: 'block'
+		});
 	});
 });
 app.run(function ($rootScope) {
@@ -20,13 +26,34 @@ app.run(function ($rootScope) {
 });
 app.controller('class', function ($scope) {
 	$.post('/homework/api/kecheng', function (res) {
-		$scope.$apply(function () {
-			$scope.classes = res;
-		})
+		//		$scope.$apply(function () {
+		$scope.classes = res;
+		//		})
 	})
 });
 app.controller('text', function ($scope, $rootScope) {
 	$scope.check = function () {
+		var flag = 0;
+		if (!$('#title').val()) {
+			$scope.text = '请输入标题';
+			flag = 1;
+		} else if (!$('#content').val()) {
+			$scope.text = '请输入作业内容';
+			flag = 1;
+		} else if (!$('#Sselect').val()) {
+			$scope.text = '请选择课程';
+			flag = 1;
+		} else if (!$('#section').val()) {
+			$scope.text = '请选择章节';
+			flag = 1;
+		}
+
+		if (flag) {
+			//			$scope.$apply();
+			boxshow();
+			return 0;
+		}
+
 		var myDate = new Date();
 		var mouth = '';
 		var day = '';
@@ -53,18 +80,21 @@ app.controller('text', function ($scope, $rootScope) {
 			Sselect: $('#Sselect').val(),
 			section: $('#section').val(),
 			mark: $('#mark').val(),
-			wenjian: $('#wenjian').html(),
+			wenjian: $('#wenjian').attr('href'),
 			time: $('#time').val(),
-			creatdate: creatdate
+			creatdate: creatdate,
+			fileName: $('#wenjian').html()
 		};
+		console.log("kehcng", dat)
 		console.log(">>>>时间", dat.time.substring(8, 10), creatdate.substring(8, 10));
 		$.post('/homework/api/addwork', dat, function (res) {
-			console.log(">>>>res", res.data);
+
 			//	发布成功，提示用户并跳转
 			if (res.code == 1) {
-				$scope.$apply(function () {
-					$scope.text = '作业发布成功,作业编号为：' + res.data
-				});
+				//				$scope.$apply(function () {
+				$scope.text = '作业发布成功,作业编号为：' + res.data
+				$scope.$apply();
+				//				});
 				boxshow();
 				setTimeout(function () {
 					window.location.href = 'TMyWork.html';
@@ -72,9 +102,10 @@ app.controller('text', function ($scope, $rootScope) {
 			}
 			//	发布失败，显示错误信息
 			else {
-				$scope.$apply(function () {
-					$scope.text = res.text
-				});
+				//				$scope.$apply(function () {
+				$scope.text = res.text
+					//				});
+				$scope.$apply();
 				boxshow();
 			}
 		})

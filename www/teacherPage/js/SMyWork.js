@@ -7,20 +7,23 @@ app.controller('SMyWorkController', function ($scope) {
 	var userid;
 	$.post('/../../start/api/getMyInfo', function (res) {
 		userid = res.data['id'];
+		var str = window.location.search;
 		var dat = {
 			userid: userid,
-			id: 1
+			id: str.substring(4)
 		}
+		console.log(">>>dads>", dat)
 		$.post('/homework/api/Sworklist', dat, function (res) {
 			console.log(">>>", res.data);
-			$scope.$apply(function () {
-				for (key in res.data) {
-					//				console.log(">>>", res.data[key].enddate.substring(0, 10))
-					res.data[key].enddate = res.data[key].enddate.substring(5, 10);
-				}
-				$scope.dat = res.data;
-				console.log(">>>", res.data);
-			})
+			//			$scope.$apply(function () {
+			for (key in res.data) {
+				//				console.log(">>>", res.data[key].enddate.substring(0, 10))
+				res.data[key].enddate = res.data[key].enddate.substring(5, 10);
+			}
+			$scope.dat = res.data;
+			$scope.$apply();
+			console.log(">>>", res.data);
+			//			})
 		})
 	})
 	$scope.chose = function (id) {

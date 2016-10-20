@@ -14,11 +14,10 @@ app.controller("checkWork", function ($rootScope, $scope) {
 		res["data"][0].creatdate = res["data"][0].creatdate.substring(0, 10);
 		var Wid = res["data"][0].wid;
 		console.log(">>>res", res["data"][0])
-		$scope.$apply(function () {
-			$scope.workinfo = res["data"][0];
+			//		$scope.$apply(function () {
+		$scope.workinfo = res["data"][0];
 
-
-			$scope.saveIt = function () {
+		$scope.saveIt = function () {
 				var sc = {
 					userid: $rootScope.userid,
 					serianumber: str.substring(13),
@@ -46,7 +45,7 @@ app.controller("checkWork", function ($rootScope, $scope) {
 					}
 				});
 			}
-		});
+			//		});
 		$scope.back = function () {
 			window.history.back();
 		}

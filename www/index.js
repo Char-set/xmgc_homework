@@ -1,3 +1,9 @@
+var mySwiper = new Swiper('.swiper-container', {
+	autoplay: 3000,
+	speed: 1000,
+	autoplayDisableOnInteraction: false,
+})
+
 var app = angular.module("app", []);
 app.config(function ($controllerProvider) {
 	app.controller = $controllerProvider.register;
@@ -9,17 +15,55 @@ app.run(function ($rootScope) {
 });
 app.controller("kzq1", function ($scope) {
 	$.post("/homework/api/indexGetWork", function (res) {
-		//		console.log(">>>", res.data)
+		console.log(">>>", res.data)
 		var shuzu = [];
 		for (var key in res.data) {
 			shuzu.push(res.data[key]);
 		}
-		var return_array = new Array();
-		for (var i = 0; i < 4; i++) {
+		var suiji = [];
+		var return_array = [];
+		var first = Math.floor(Math.random() * shuzu.length);
+		suiji.push(first);
+		return_array[0] = shuzu[first];
+		$scope.refrash = function () {
+			var suiji = [];
+			var return_array = [];
+			var first = Math.floor(Math.random() * shuzu.length);
+			suiji.push(first);
+			return_array[0] = shuzu[first];
+			for (var i = 1; i < 4; i++) {
+				if (shuzu.length > 0) {
+					var arrIndex = Math.floor(Math.random() * shuzu.length);
+					for (var j = 0; j < suiji.length; j++) {
+						while (suiji[j] == arrIndex) {
+							arrIndex = Math.floor(Math.random() * shuzu.length);
+							console.log("suiji", arrIndex)
+						}
+					}
+					suiji.push(arrIndex);
+					return_array[i] = shuzu[arrIndex];
+				} else {
+					break;
+				}
+			}
+			for (key in return_array) {
+				if (return_array[key]["number"] == null) {
+					return_array[key]["number"] = 0;
+				}
+			}
+			$scope.indexWork = return_array;
+		};
+		for (var i = 1; i < 4; i++) {
 			if (shuzu.length > 0) {
 				var arrIndex = Math.floor(Math.random() * shuzu.length);
+				for (var j = 0; j < suiji.length; j++) {
+					while (suiji[j] == arrIndex) {
+						arrIndex = Math.floor(Math.random() * shuzu.length);
+						console.log("suiji", arrIndex)
+					}
+				}
+				suiji.push(arrIndex);
 				return_array[i] = shuzu[arrIndex];
-				shuzu.slice(arrIndex, 1);
 			} else {
 				break;
 			}
@@ -108,3 +152,38 @@ app.controller("rolecontroller", function ($scope) {
 
 	}
 });
+
+$(function () {
+	$("#giveUp").click(function () {
+		$("#searchPage").animate({
+			left: "100%"
+		})
+	});
+	$('#search').click(function () {
+		$('#searchPage').animate({
+			left: 0
+		})
+	})
+})
+
+app.controller("searchPageController", function ($scope) {
+	$scope.search = function () {
+		var text = $("#searchInput").val();
+		//		setTimeout(console.log("sousuo:", text), 2000);
+		var dat = {
+			value: $("#searchInput").val()
+		};
+		$.get('/homework/api/search', dat, function (res) {
+			console.log("返回值：", res.data.work);
+			var result = res.data.work;
+			if (result.length == 0) {
+				$("#noresult").show();
+				$("#result").hide();
+			} else {
+				$("#noresult").hide();
+				$("#result").show();
+				$scope.searchResult = result;
+			}
+		})
+	}
+})

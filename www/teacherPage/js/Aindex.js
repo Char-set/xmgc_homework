@@ -13,36 +13,12 @@ app.run(function ($rootScope) {
 	$rootScope.navurl = 'controller/nav.html';
 	$rootScope.alerturl = 'controller/alert.html';
 	//老师数量
-	$.post("/homework/api/getteaNumber", function (res) {
-		$rootScope.$apply(function () {
-			$rootScope.number1 = res[0]["count(*)"];
-			console.log(res);
-		});
+	$.get("/homework/api/getNumber", function (res) {
+		console.log("....", res.data);
+		$rootScope.number = res.data;
 	});
 
-	//讨论区条数
-	$.post("/homework/api/getnoticeNumber", function (res) {
-		$rootScope.$apply(function () {
-			$rootScope.number2 = res[0]["count(*)"];
-			console.log(res);
-		});
-	});
 
-	//学生数量
-	$.post("/homework/api/getstuNumber", function (res) {
-		$rootScope.$apply(function () {
-			$rootScope.number3 = res[0]["count(*)"];
-			console.log(res);
-		});
-	});
-
-	//作业数量
-	$.post("/homework/api/getworkNumber", function (res) {
-		$rootScope.$apply(function () {
-			$rootScope.number4 = res[0]["count(*)"];
-			console.log(res);
-		});
-	});
 });
 app.controller('adminController', function ($scope, $rootScope) {
 
@@ -72,13 +48,21 @@ app.controller('adminController', function ($scope, $rootScope) {
 		var myDate = new Date();
 		var mouth = '';
 		var day = '';
-		if (myDate.getMonth() < 10) {
+		var hour = '';
+		var minutes = '';
+		if (myDate.getMonth() + 1 < 10) {
 			mouth = "0";
 		}
 		if (myDate.getDate() < 10) {
 			day = "0";
 		}
-		var creatdate = myDate.getFullYear() + "-" + mouth + (myDate.getMonth() + 1) + "-" + day + myDate.getDate() + " " + myDate.getHours() + ":" + myDate.getMinutes();
+		if (myDate.getHours() < 10) {
+			hour = "0";
+		}
+		if (myDate.getMinutes() < 10) {
+			minutes = "0";
+		}
+		var creatdate = myDate.getFullYear() + "-" + mouth + (myDate.getMonth() + 1) + "-" + day + myDate.getDate() + " " + hour + myDate.getHours() + ":" + minutes + myDate.getMinutes();
 		var dat = {
 			creatdate: creatdate,
 			userid: $rootScope.userid,

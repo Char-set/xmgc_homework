@@ -1,18 +1,3 @@
-//	附件上传
-$('#shangchuan').click(function () {
-	_fns.uploadFile2($('#shangchuan'), function (f) {
-		console.log('>>>>before:', f);
-	}, function (f) {
-		console.log('>>>>progressAAAA:', f);
-		$('#wancheng').css('width', f.percent + '%');
-		$('#wancheng').html(f.percent + '%');
-		console.log('>>>>>AAAA');
-	}, function (f) {
-		console.log('>>>>successXXXX:', f);
-		$('#wenjian').html(f.url);
-		$('#wenjian').attr('href', f.url);
-	});
-});
 app.controller('sdatacontroller', function ($scope, $rootScope) {
 	var serianumber;
 	var score;
@@ -40,14 +25,24 @@ app.controller('sdatacontroller', function ($scope, $rootScope) {
 			})
 		})
 	})
+	$scope.shangchuan = function () {
+		_fns.uploadFile2($('#shangchuan'), function (f) {
+			console.log('>>>>before:', f);
+		}, function (f) {
 
+		}, function (f) {
+			console.log('>>>>successXXXX:', f);
+			$('#wenjian').html(f.name);
+			$('#wenjian').attr('href', f.url);
+		});
+	}
 	$scope.update = function () {
 		console.log(">>>", score);
 		if (score == null) {
 			var myDate = new Date();
 			var mouth = '';
 			var day = '';
-			if (myDate.getMonth() < 10) {
+			if (myDate.getMonth() + 1 < 10) {
 				mouth = "0";
 			}
 			if (myDate.getDate() < 10) {
@@ -59,18 +54,19 @@ app.controller('sdatacontroller', function ($scope, $rootScope) {
 			var str = window.location.search;
 			var date = {
 				wid: str.substring(5),
-				wenjian: $('#wenjian').html(),
+				wenjian: $('#wenjian').attr('href'),
 				serianumber: serianumber,
 				answer: $("#answer").val(),
-				update: update
+				update: update,
+				fileName: $('#wenjian').html()
 			}
 			console.log("date<<<<", date);
 			$.post("/homework/api/updateSwork", date, function (res) {
 				console.log(">>>>51", res)
 				if (res.code == 1) {
 					console.log("code==1");
-					$scope.$apply(function () {
-						$scope.text = '作业提交成功'
+					$rootScope.$apply(function () {
+						$rootScope.text = '作业提交成功'
 					});
 					boxshow();
 					setTimeout(function () {
@@ -79,15 +75,15 @@ app.controller('sdatacontroller', function ($scope, $rootScope) {
 				}
 				//	更新失败，显示错误信息
 				else {
-					$scope.$apply(function () {
-						$scope.text = res.text
+					$rootScope.$apply(function () {
+						$rootScope.text = res.text
 					});
 					boxshow();
 				}
 			})
 		} else {
 
-			$scope.text = '作业已批改，无法更新';
+			$rootScope.text = '作业已批改，无法更新';
 
 			boxshow();
 		}

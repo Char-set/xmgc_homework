@@ -19,13 +19,26 @@
 		font-size: 15px;
 		font-family: "微软雅黑";
 	}
+
+	@media screen and ( max-width:320px) {
+		.drawer-li {
+			margin-top: -7%;
+		}
+	}
+
+	@media screen and (min-width:321px) and ( max-width:768px) {
+		.drawer-li {
+			margin-top: -1%;
+		}
+	}
 </style>
 
 <div id="drawer" class="col-xs-12 height" style="padding: 0;position: fixed;top:0;bottom:0;background: rgba(33,33,33,0.7);z-index: 1089;display: none"></div>
-<div ng-controller='myc' id="drawer1" class="col-xs-9 height" style="background:#279DA9;z-index: 1090;left: -80%;position: fixed;top:0;bottom:0;">
-	<nav class="row" style="margin-top:10px;">
+<div ng-controller='myc' id="drawer1" class="col-xs-9 height" style="background:rgb(100, 160, 195);;z-index: 1090;left: -80%;position: fixed;top:0;bottom:0;">
+	<nav class="row" style="margin-top:20px;" ng-click="uplaod()">
 		<div style="text-align:center;">
-			<img src="http://www.geminno.cn/files/user/2016/08-31/1624204a2c9d448977.GIF" alt="" height="110px" style="border-radius: 110px;"></div>
+			<img id='img' src="" alt="" height="110px" style="border-radius: 50%;width:60px;height:60px;">
+		</div>
 		<h4 ng-bind="userinfo.nick" style="text-align:center;color:white;height:32px;line-height:32px;"></h4>
 	</nav>
 	<a href="http://m.xmgc360.com/homework/web/">
@@ -35,14 +48,14 @@
 			</div>
 		</div>
 	</a>
-	<a href="CWorkRes.html">
+	<a href="__CWorkRes.html">
 		<div class="panel panel-default drawer-li">
 			<div class="panel-body">
 				<span class="glyphicon glyphicon-th-list" style="color:#6bc0ff;"></span><span class="gongneng">&nbsp;&nbsp;作业库</span>
 			</div>
 		</div>
 	</a>
-	<a href="SMyWork.html">
+	<a href="SMyWork.html?id=1">
 		<div class="panel panel-default drawer-li stu">
 			<div class="panel-body">
 				<span class="glyphicon glyphicon-tag" style="color:#6bffbb;"></span><span class="gongneng">&nbsp;&nbsp;未提交</span>
@@ -88,3 +101,4 @@
 	</a>
 </div>
 <script src="/homework/web/teacherPage/controller/nav.js"></script>
+<script src="/homework/web/teacherPage/js/common.js"></script>

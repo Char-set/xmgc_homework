@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="" ng-app='app'>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+	<title></title>
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+	<link href="//cdn.bootcss.com/Swiper/3.3.1/css/swiper.min.css" rel="stylesheet">
+	<style>
+		li a {
+			color: white;
+		}
+
+		.nav>li>a:hover {
+			color: white;
+			background: transparent;
+		}
+	</style>
+</head>
+
+<body ng-controller='swiperControlle'>
+	<div id='bg' style="position:fixed;height:100%;width:100%;z-index:-1;background: url('images/blli.png') no-repeat;background-size: 100%;"></div>
+	<div class="container">
+		<nav class="nav navbar" style="position: fixed;background-color:#bde5ef;width:100%;left:0;z-index:50">
+			<span id="pull" style="color:white;margin-left:10px;" class="glyphicon glyphicon-align-justify"></span>
+			<h4 style="color: white;display:inline-block;">作业详情</h4>
+		</nav>
+
+		<div class="row" style="position:fixed;width:100%;background-color:#bde5ef;z-index:49;left: 0px;margin-left: 0px;">
+
+			<ul class="nav nav-pills" role="tablist" style="margin-top:50px;">
+				<li ng-click='change(0)' id='wd' role="presentation" style="margin-left:10%;margin-right:5
+                %;" class="active"><a role="tab" data-toggle="tab">作业详情</a></li>
+				<li ng-click='change(1)' id='we' role="presentation" style="margin-left:5%;margin-right:5
+                %;"><a role="tab" data-toggle="tab">编辑作业</a></li>
+				<li ng-click='change(2)' id='wc' role="presentation" style="margin-left:5%;margin-right:10
+                %;"><a role="tab" data-toggle="tab">作业讨论区</a></li>
+			</ul>
+		</div>
+		<div class="swiper-container" style="top:100px;">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide" style="">
+					<div class="panel panel-default1" id="mypanel">
+						<div class="panel-body">
+							<p ng-bind='workinfo.content'></p>
+						</div>
+						<ul class="list-group">
+							<li class="list-group-item">课程章节：<span>{{workinfo.cname}}第{{workinfo.section}}章</span></li>
+							<li class="list-group-item">发布人&nbsp;&nbsp;&nbsp;：<span ng-bind='workinfo.xname'></span></li>
+							<li class="list-group-item">发布时间：<span ng-bind='workinfo.creatdate'></span></li>
+							<li class="list-group-item">截止提交：<span ng-bind='workinfo.enddate'></span></li>
+							<li class="list-group-item" id="annex">附件：
+								<a href="{{workinfo.annex}}"><span class="glyphicon glyphicon-file"></span></a>
+							</li>
+							<li class="list-group-item">提交状态：<span id="up">未提交</span></li>
+							<li class="list-group-item">批改状态：<span id="check">未批改</span></li>
+							<li class="list-group-item">成绩&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：&nbsp;<span ng-bind='sworkinfo.score'></span></li>
+							<li class="list-group-item">教师留言：<span ng-bind='sworkinfo.tadvice'>无</span></li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="swiper-slide" style="">
+					<form role="form" style='padding-bottom:50px;background:white;border-radius:7px;'>
+						<div class="form-group col-xs-12" style="margin-top:25px;">
+							<lable>请填写你的答案：</lable>
+							<textarea id='answer' style='margin-top:15px;height:300px;resize:none' class="form-control" ng-bind='sworkinfo.answer' maxlength="1000" placeholder="作业答案...">
+
+							</textarea>
+						</div>
+						<div class="form-group">
+							<label for="shangchuan" class="title" style="margin-left:15px;">附件:</label>&nbsp;
+							<a id='wenjian' href='{{sworkinfo.annex}}'>{{sworkinfo.filename}}</a>
+							<div id='shangchuan' class="btn btn-primary pull-right btn-xs" ng-click='shangchuan()' style="margin-right:15px;">更新文件</div>
+						</div>
+						<div id="up" class="btn btn-primary pull-right" style="margin-bottom:15px;margin-right:5px;">
+							<span ng-click="update()">提交</span>
+						</div>
+						<button type="reset" class="btn btn-danger pull-right" style="margin-right:50px">重置</button>
+					</form>
+
+				</div>
+				<div class="swiper-slide" style="">
+					<div class="ylcon" style="width:100%;color:black;margin-bottom: 50px;" ng-click="back()">
+						<div class="story" ng-repeat="(key,val) in obj" data-toggle="modal" data-target="#myModal" ng-click="select()" style="color:white;margin-bottom:10px;{{val.bg}}">
+							<div class="opbtn"></div>
+							<span class="story_time">{{val.creatdate}}</span>
+							<span style="float:right">{{val.timbs}}</span>
+							<span class="glyphicon glyphicon-thumbs-up" style="color:white;float:right;" ng-click="timbs()"></span>
+							<p class="story_t"><small>{{val.nick}}</small></p>
+							<p class="">{{val.content}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+		<div id='addChat' class="row" style="position:fixed;left:0;right:0;bottom:0;height:35px;background:#104766;z-index:20;display:none;">
+			&nbsp; <span id="icon" class="glyphicon glyphicon-pencil col-xs-1" style="color:#e5e5e5;margin-left:10px;margin-top:10px;"></span>
+			<input class="col-xs-8" type="text" placeholder='我想说...' id="chat" style='padding-left:5px;outline:none;padding:0;color:white;background-color:rgba(255,255,255,0);border-left:0px;border-top:0px;border-right:0px;border-bottom:1px solid white;margin-top:10px;'>
+			<span class="btn btn-default col-xs-2" style="margin-top:10px;color:white;background-color:rgba(255,255,255,0.2);padding:0;margin-left:5px;" ng-click="fabu()">发布</span>
+		</div>
+	</div>
+
+
+
+	<div style="position:fixed;z-index:150" ng-include="$root.navurl"></div>
+	<div style="width:100%;" ng-include='$root.alerturl'></div>
+
+	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<script src="//cdn.bootcss.com/angular.js/1.5.8/angular.min.js"></script>
+	<script src="//cdn.bootcss.com/angular-ui-bootstrap/0.13.3/ui-bootstrap-tpls.min.js"></script>
+	<script src="//cdn.bootcss.com/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
+	<script src="js/common.js"></script>
+	<script src="js/check.js"></script>
+	<script src="js/_SWorkDetail.js"></script>
+</body>
+
+</html>

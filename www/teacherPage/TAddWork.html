@@ -3,20 +3,25 @@
 
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width height=device-height initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
 	<title>my homework</title>
 	<meta charset=utf-8>
 	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/TAddWork.css">
 	<style>
-		font-family: "微软雅黑";
+		* {
+			font-family: '宋体';
+			font-size: 13px;
+			/*			background-size: */
+		}
 	</style>
 </head>
 
-<body ng-controller='text' style="background: url('images/blli1.jpg') no-repeat center fixed;background-size: 100% 100%">
-	<nav class="nav navbar center-block _nav " style="background-color: rgba(255,255,255,0.2);height: 40px;position: absolute;">
+<body ng-controller='text'>
+	<div id='bg' style="position:fixed;height:100%;width:100%;z-index:-1;background: url('images/blli1.jpg') no-repeat;background-size: 100%;"></div>
+	<nav class="nav navbar center-block _nav " style="background-color: rgba(255,255,255,0.2);min-height: 40px;position: absolute;">
 		<!--顶部按钮-->
-		<span class="btn glyphicon glyphicon-align-justify" style="color: white" id='pull' data-toggle="modal" data-target=".bs-example-modal-lg"></span>
+		<span class="btn glyphicon glyphicon-align-justify" style="color: white;top: -2px;" id='pull' data-toggle="modal" data-target=".bs-example-modal-lg"></span>
 		<div style="color:white;margin: 0 auto;width: 100px;display: inline-block;line-height: 40px">
 			<h4>发布作业</h4></div>
 	</nav>
@@ -26,16 +31,16 @@
 		<form role="form">
 			<div class="form-group">
 				<label for="title" class="title">标题</label>
-				<input type="text" class="form-control" id="title" placeholder="Enter title">
+				<input type="text" class="form-control" maxlength="20" id="title" placeholder="作业标题...">
 			</div>
 			<div class="form-group">
 				<label for="content" class="title">内容</label>
-				<textarea class="form-control" id="content" placeholder="Content" style="height:150px;width:100%"></textarea>
+				<textarea class="form-control" id="content" maxlength="200" placeholder="主要内容..." style="height:150px;width:100%;resize:none"></textarea>
 			</div>
 			<div class="form-group">
 				<label for="" class="title">课程</label>
 				<select ng-controller='class' class="form-control" style="text-align:center" name="" id="Sselect">
-					<option id='option' value="请选择" class="">请选择...</option>
+					<option id='option' value="" class="">请选择...</option>
 					<option ng-repeat="class in classes" value="{{class.name}}" class="">{{class.name}}</option>
 				</select>
 			</div>
@@ -56,16 +61,16 @@
 			</div>
 			<div class="form-group">
 				<label for="mark" class="title">备注</label>
-				<input type="text" class="form-control" id="mark" placeholder="Some message">
+				<textarea class="form-control" id="content" maxlength="100" placeholder="注意事项" style="height:50px;width:100%;resize:none;"></textarea>
 			</div>
 
 			<div class="form-group">
 				<label for="shangchuan" class="title">附件:</label>
 				<div id='shangchuan' class="btn btn-primary">上传文件</div>
-				<div style="width:200px;margin:12px;background:gray;border-radius: 8px;">
+				<div id="jindu" style="width:200px;margin:12px;background:gray;border-radius: 8px;">
 					<div id='wancheng' style="background:green;width:0;border-radius: 8px;margin-left:2px;">0%</div>
 				</div>
-				<a id='wenjian' href='' style="display:none;" ng-bind='sworkinfo.annex'>....</a>
+				<a id='wenjian' href='' style="display:none;color:white;margin:10px 0 0 8px;" ng-bind='sworkinfo.annex'>....</a>
 			</div>
 
 			<div id="up" class="btn btn-primary pull-right" style="margin-bottom:15px;">

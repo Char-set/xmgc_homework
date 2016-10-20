@@ -14,15 +14,10 @@ app.controller("studentWork", function ($rootScope, $scope) {
 			date[key].cretdate = date[key].cretdate.substring(0, 10);
 		}
 		console.log(">>>>>afte", date);
-		$scope.$apply(function () {
-			$scope.workinfo = date;
-		});
+		//		$scope.$apply(function () {
+		$scope.workinfo = date;
+		//		});
 
 	});
 
-
-
-	//    $scope.$apply(function () {
-	//
-	//    });
 });

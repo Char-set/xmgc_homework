@@ -19,3 +19,9 @@ function change(id) {
 		display: 'block'
 	});
 }
+$(function () {
+//	$("#bg").css({
+			//		width: screen.availWidth,
+			//		height: screen.availHeight
+			//	})
+})

@@ -3,38 +3,35 @@
 
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, height=device-height,initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
 	<title>HTML作业</title>
-	<!--&lt;!&ndash; 新 Bootstrap 核心 CSS 文件 &ndash;&gt;-->
-	<!--<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">-->
-
-	<!--&lt;!&ndash; 可选的Bootstrap主题文件（一般不用引入） &ndash;&gt;-->
-	<!--<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">-->
-
-	<!-- 新 Bootstrap 核心 CSS 文件 -->
 	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/TMyWork.css">
-
-	<!-- 可选的Bootstrap主题文件（一般不用引入） -->
-	<link rel="stylesheet" href="/../../public/css/bootstrap-theme.min.css">
+	<style>
+		* {
+			font-family: '宋体';
+			font-size: 13px;
+		}
+	</style>
 </head>
 
-<body style="background: url('images/blli1.jpg') no-repeat center fixed;background-size: 100% 100%">
+<body>
+	<div id='bg' style="position:fixed;height:100%;width:100%;z-index:-1;background: url('images/blli1.jpg') no-repeat;background-size: 100%;"></div>
 	<!--<div id="contain">-->
 	<nav class="nav navbar" style="position: absolute;">
-		<span id="pull" class="glyphicon glyphicon-align-justify" style="color:white;margin-left:15px;"></span>
+		<span id="pull" class="glyphicon glyphicon-align-justify" style="color:white;margin-left:15px;top:-1px;"></span>
 		<h4 style="color: white;margin-left: 10px;display:inline-block;">我的作业</h4>
 	</nav>
 
 	<div ng-controller='worklist' class="panel-group col-xs-10" id="accordion" role="tablist" aria-multiselectable="true" style="padding-left: 5px;padding-right: 5px;position:absolute;top:70px;margin-left:8%;">
-		<div ng-repeat='class in classes' class="panel panel-default" style="background:none;margin-bottom:20px;">
+		<div ng-repeat='class in classes' class="panel panel-default" style="background:none;margin-bottom:35px;">
 			<div style="background-color:white;" class="panel-heading text-center" role="tab" id="heading{{class.cid}}">
 				<h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{class.cid}}" aria-expanded="true" aria-controls="collapse{{class.cid}}">{{class.name}}</a></h4>
 			</div>
-			<div id="collapse{{class.cid}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading{{class.cid}}">
+			<div id="collapse{{class.cid}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{class.cid}}">
 				<ul class="list-group worklist">
-					<li style="padding:1px;margin-bottom: 10px;" ng-repeat='(key,value) in worklists | filter : {cid:class.cid}' ng-click="jump()" class="list-group-item myWork">
-						<a href="TWorkDetail.html?wid={{value.wid}}">
+					<li style="padding:1px;margin-bottom: 10px;" ng-repeat='(key,value) in worklists | filter : {cid:class.cid}' class="list-group-item myWork">
+						<a href="_TWorkDetail.html?wid={{value.wid}}">
 							<span value='{{value.wid}}' style='display:none'>{{value.wid}}</span>
 							<span value='{{value.cid}}' style='display:none'>{{value.cid}}</span>
 							<span>{{value.title}}</span>

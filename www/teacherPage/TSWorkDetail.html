@@ -9,10 +9,80 @@
 			<li class="list-group-item">发布时间：<span ng-bind="workinfo.creatdate"></span></li>
 			<li class="list-group-item">截止提交：<span ng-bind="workinfo.enddate"></span></li>
 			<li class="list-group-item" id="annex">附件：
-				<a href="{{workinfo.annex}}"><span class="glyphicon glyphicon-file"></span></a>
+				<a href="{{workinfo.annex}}"><span class="glyphicon glyphicon-file">{{workinfo.filename}}</span></a>
 			</li>
 			<li class="list-group-item">备注：<span ng-bind="workinfo.mark"></span></li>
 		</ul>
 	</div>
+	<button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#myModal">
+		更新作业
+	</button>
+	<button class="btn btn-danger pull-right" ng-click='delete()' style="margin-right:10px;">删除作业</button>
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<h4 class="modal-title" id="myModalLabel">更新作业</h4>
+				</div>
+				<div class="modal-body">
+					<form role="form">
+						<div class="form-group">
+							<label for="title" class="title">标题</label>
+							<input value='{{workinfo.title}}' type="text" class="form-control" id="title" placeholder="Enter title">
+						</div>
+						<div class="form-group">
+							<label for="content" class="title">内容</label>
+							<textarea class="form-control" id="content" placeholder="Content" style="height:150px;width:100%;resize:none">{{workinfo.content}}</textarea>
+						</div>
+						<div class="form-group">
+							<label for="" class="title">课程</label>
+							<select class="form-control" style="text-align:center" name="" id="Sselect">
+								<option id='option' value="{{workinfo.cname}}" class="">{{workinfo.cname}}</option>
+								<option ng-repeat="class in classes" value="{{class.name}}" class="">{{class.name}}</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="" class="title">章节</label>
+							<select class="form-control" name="" id="section">
+								<option value="{{workinfo.section}}" class="active">{{workinfo.section}}</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="" class="title">截止时间</label>
+							<br>
+							<input value='{{workinfo.enddate}}' type="date" id="time" style="">
+						</div>
+						<div class="form-group">
+							<label for="mark" class="title">备注</label>
+							<input value="{{workinfo.mark}}" type="text" class="form-control" id="mark" placeholder="Some message">
+						</div>
+
+						<div class="form-group">
+							<label for="shangchuan" class="title">附件:</label>&nbsp;
+							<a id='wenjian' href='{{workinfo.annex}}'>{{workinfo.filename}}</a>
+							<div id='shangchuan' class="btn btn-primary pull-right btn-xs" ng-click='shangchuan()'>更新文件</div>
+						</div>
+
+					</form>
+				</div>
+				<div class="modal-footer">
+					<div ng-click='update()' class="btn btn-primary pull-right" style="margin-bottom:15px;">
+						<span>更新</span>
+					</div>
+					<button type="button" class="btn btn-danger pull-right" style="margin-right:50px" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 </article>
 <script src="js/TSWorkDetail.js"></script>

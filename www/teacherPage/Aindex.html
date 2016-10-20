@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
 	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/animate.min.css">
 
@@ -19,7 +19,7 @@
 			width: 100%;
 			min-height: 100px;
 			max-height: 300px;
-			_height: 120px;
+			height: 120px;
 		}
 	</style>
 	<title>管理员界面</title>
@@ -44,7 +44,7 @@
 		</div>
 
 
-		<div class="panel panel-default  panel-primary" style="width:100%;margin-top: 50px; ">
+		<div class="panel panel-default  panel-primary" style="width:100%;margin-top: 10px; ">
 			<div class="panel-heading">
 				<h3 class="panel-title"><span class="glyphicon glyphicon-magnet"></span> <b>赋予身份</b></h3>
 			</div>
@@ -91,21 +91,21 @@
 			<div class="panel-body animated rotateInDownLeft">
 				<div class="row">
 					<div class="col-xs-6">
-						总计作业数：<span>{{number4}}</span> 篇.
+						总计作业数：<span>{{number[3].wNumber}}</span> 篇.
 					</div>
 					<div class="col-xs-6">
 						老师数量：
-						<span>{{number1}}</span> 名.
+						<span>{{number[0].tNumber}}</span> 名.
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-xs-6">
 						学生数量：
-						<span>{{number3}}</span> 名.
+						<span>{{number[2].sNumber}}</span> 名.
 					</div>
 					<div class="col-xs-6">
 						讨论区条数：
-						<span>{{number2}}</span> 条.
+						<span>{{number[1].cNumber}}</span> 条.
 					</div>
 				</div>
 			</div>
