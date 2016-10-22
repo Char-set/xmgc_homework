@@ -2,73 +2,87 @@
 <html lang="en" ng-app='app' ng-controller='rolecontroller'>
 
 <head>
-	<meta charset="UTF-8">
-	<title>作业列表</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/CWorkResDetail.css">
-	<style>
-		* {
-			font-family: '宋体';
-			font-size: 13px;
-		}
-	</style>
+    <meta charset="UTF-8">
+    <title>作业列表</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/CWorkResDetail.css">
+    <style>
+        * {
+            font-family: '宋体';
+            font-size: 13px;
+        }
+    </style>
 </head>
 
-<body style="position:relative;background: url('images/blli1.jpg') no-repeat;background-size:cover;">
-	<!--	<div id='bg' style="position:fixed;height:100%;width:100%;z-index:-1;background: url('images/blli1.jpg') no-repeat;background-size: 100%;"></div>-->
-	<!-- 顶部按钮-->
-	<nav class="nav navbar center-block _nav " style="background-color: rgba(255,255,255,0.2);height: 40px;position:absolute ;width:100%;">
-		<!--顶部按钮-->
-		<span class="btn glyphicon glyphicon-align-justify" style="position:absolute;top: 3px;color: white" id='pull'></span>
-		<div style="position:absolute;left: 35px;top: 3px;color:white;margin: 0 auto;width: 100px;display: inline-block;line-height: 40px;">
-			<h4>作业详情</h4></div>
-	</nav>
-	<!-- 大标题-->
+<body style="position:relative;">
+    <div id='bg' style="position:fixed;height:100%;width:100%;z-index:-1;background: url('images/blli1.jpg') no-repeat;background-size: 100%;"></div>
+    <!-- 顶部按钮-->
+    <nav class="nav navbar center-block _nav " style="background-color: rgba(255,255,255,0.2);height: 40px;position:absolute ;width:100%;">
+        <!--顶部按钮-->
+        <span class="btn glyphicon glyphicon-align-justify" style="position:absolute;top: 3px;color: white" id='pull'></span>
+        <div style="position:absolute;left: 35px;top: 3px;color:white;margin: 0 auto;width: 100px;display: inline-block;line-height: 40px;">
+            <h4>作业详情</h4></div>
+    </nav>
+    <!-- 大标题-->
 
-	<!-- 主题内容 -->
-	<div class="container" style="width:85%;background-color:rgba(255,255,255,0.2);margin-bottom:30px;margin-top: 80px;margin-left:28px;position: absolute;z-index: 50;color:white">
+    <!-- 主题内容 -->
+    <div class="container" style="width:85%;background-color:rgba(255,255,255,0.2);margin-bottom:30px;margin-top: 80px;margin-left:28px;position: absolute;z-index: 50;color:white">
 
-		<form style="margin-top:20px;line-height: 35px" class="" role="form">
-			<div class="form-group">
-				<p class="panel-title"><span>标题：</span><span>{{$root.workinfo.title}}</span></p>
-			</div>
-			<div class="form-group">
-				<p class="panel-title"><span>课程：</span><span>{{$root.workinfo.cname}}</span></p>
-			</div>
-			<div class="form-group">
-				<p class="panel-title"><span>章节：</span><span style="font-weight: bold">第&nbsp;<span>{{$root.workinfo.section}}</span>&nbsp;章</span>
-				</p>
-			</div>
-			<div class="form-group">
-				<p class="panel-title"><span>发布人：</span><span>{{$root.workinfo.xname}}</span></p>
-			</div>
-			<div class="form-group">
-				<label for="content">内容：</label>
-				<textarea rows=5 cols="1" class="form-control" disabled id="content" placeholder="Content" style="height:80px;resize:none;">{{$root.workinfo.content}}</textarea>
-			</div>
-			<div class="form-group" id='annex'>
-				<p class="panel-title"><span>查看文件：</span><a href="{{$root.workinfo.annex}}"><span >{{workinfo.filename}}</span></a></p>
-			</div>
-			<div class="form-group">
-				<p class="panel-title"><span>发布日期：</span><span>{{$root.time.uptime}}</span></p>
-			</div>
-			<div class="form-group">
-				<p class="panel-title"><span>截止提交日期：</span><span>{{$root.time.endtime}}</span></p>
-			</div>
-			<div type="submit" ng-click="chose()" class="btn btn-primary pull-right stu" style="margin-bottom:15px;margin-right: 5px">领取作业</div>
-			<div class="btn btn-danger pull-right" ng-click="back()" style="margin-right: 15px;margin-bottom:10px;">返回</div>
-		</form>
-	</div>
-	<div style="width:100%;" ng-include='$root.alerturl'></div>
-	<div style="position:fixed;z-index:150" ng-include="$root.navurl"></div>
-	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
-	<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-	<script src="//cdn.bootcss.com/angular.js/1.3.20/angular.min.js"></script>
-	<script src="//cdn.bootcss.com/angular-ui-bootstrap/0.13.3/ui-bootstrap-tpls.min.js"></script>
-	<!--载入登入检测-->
-	<script src="js/check.js"></script>
-	<script src="js/CWorkResDetail.js"></script>
+        <form style="margin-top:20px;line-height: 35px" class="" role="form">
+            <div class="form-group">
+                <p class="panel-title"><span>标题：</span><span>{{$root.workinfo.title}}</span></p>
+            </div>
+            <div class="form-group">
+                <p class="panel-title"><span>课程：</span><span>{{$root.workinfo.cname}}</span></p>
+            </div>
+            <div class="form-group">
+                <p class="panel-title"><span>章节：</span><span style="font-weight: bold">第&nbsp;<span>{{$root.workinfo.section}}</span>&nbsp;章</span>
+                </p>
+            </div>
+            <div class="form-group">
+                <p class="panel-title"><span>发布人：</span><span>{{$root.workinfo.xname}}</span></p>
+            </div>
+            <div class="form-group">
+                <label for="content">内容：</label>
+                <textarea rows=5 cols="1" class="form-control" disabled id="content" placeholder="Content" style="height:80px;resize:none;">{{$root.workinfo.content}}</textarea>
+            </div>
+            <div class="form-group" id='annex'>
+                <p class="panel-title"><span>查看文件：</span><span ng-click="view()">{{workinfo.filename}}</span></p>
+            </div>
+            <div class="form-group">
+                <p class="panel-title"><span>发布日期：</span><span>{{$root.time.uptime}}</span></p>
+            </div>
+            <div class="form-group">
+                <p class="panel-title"><span>截止提交日期：</span><span>{{$root.time.endtime}}</span></p>
+            </div>
+            <div type="submit" ng-click="chose()" class="btn btn-primary pull-right stu" style="margin-bottom:15px;margin-right: 5px">领取作业</div>
+            <div class="btn btn-danger pull-right" ng-click="back()" style="margin-right: 15px;margin-bottom:10px;"><a style="color:white;text-decoration:none;" href="__CWorkRes.html">返回</a></div>
+        </form>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="height:100%;">
+            <div class="modal-content" style="height:90%;">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true" style="margin-right:20px;">&times;</span><span class="sr-only">Close</span></button>
+
+                <iframe id="view" style="border:none;" width="100%" height="90%" src="" class="modal-body"></iframe>
+            </div>
+        </div>
+    </div>
+
+
+    <div style="width:100%;" ng-include='$root.alerturl'></div>
+    <div style="position:fixed;z-index:150" ng-include="$root.navurl"></div>
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//cdn.bootcss.com/angular.js/1.3.20/angular.min.js"></script>
+    <script src="//cdn.bootcss.com/angular-ui-bootstrap/0.13.3/ui-bootstrap-tpls.min.js"></script>
+    <!--载入登入检测-->
+    <script src="js/check.js"></script>
+    <script src="js/CWorkResDetail.js"></script>
 </body>
 
 </html>

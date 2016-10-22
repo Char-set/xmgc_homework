@@ -1,28 +1,6 @@
-//	附件上传
-$('#shangchuan').click(function () {
-	_fns.uploadFile2(2, $('#shangchuan'), function (f) {
-		console.log('>>>>before:', f);
-	}, function (f) {
-		console.log('>>>>progressAAAA:', f);
-		$('#wancheng').css('width', f.percent + '%');
-		$('#wancheng').html(f.percent + '%');
-		console.log('>>>>>AAAA');
-	}, function (f) {
-		console.log('>>>>successXXXX:', f);
-		$('#wenjian').html(f.name);
-		$('#wenjian').attr('href', f.url);
-		$('#jindu').css({
-			display: 'none'
-		});
-		$('#wenjian').css({
-			display: 'block'
-		});
-	});
-});
 app.run(function ($rootScope) {
 	$rootScope.navurl = 'controller/nav.html';
 	$rootScope.alerturl = 'controller/alert.html';
-
 });
 app.controller('class', function ($scope) {
 	$.post('/homework/api/kecheng', function (res) {
@@ -32,6 +10,43 @@ app.controller('class', function ($scope) {
 	})
 });
 app.controller('text', function ($scope, $rootScope) {
+	$scope.file = '';
+	$('#shangchuan').click(function () {
+		_fns.uploadFile2(2, $('#shangchuan'), function (f) {}, function (f) {
+			$('#wancheng').css('width', f.percent + '%');
+			$('#wancheng').html(f.percent + '%');
+		}, function (f) {
+			$scope.$apply(function () {
+				$scope.file = f;
+				$scope.size = Number(f.size / 1048576).toFixed(2);
+
+			});
+			var url0 = encodeURIComponent(f.url);
+			var url = "http://api.idocv.com/view/url?url=" + url0 + "&name=" + f.name + "        ";
+			$('#wenjian').html(f.name);
+			$('#view').attr('src', url);
+			$('#jindu').css({
+				display: 'none'
+			});
+			$('#wenjian,#review,#size').css({
+				display: 'inline-block'
+			});
+		});
+	});
+
+	$scope.review = function () {
+		console.log(">>>>>>f", $scope.file);
+		var size = $scope.file.size / 1048576;
+		console.log(">>>>>size", size);
+		if (size > 1) {
+			$scope.text = "文件过大，无法预览！";
+			boxshow();
+		} else {
+			$('#myModal').modal()
+		}
+
+	}
+
 	$scope.check = function () {
 		var flag = 0;
 		if (!$('#title').val()) {
@@ -45,6 +60,9 @@ app.controller('text', function ($scope, $rootScope) {
 			flag = 1;
 		} else if (!$('#section').val()) {
 			$scope.text = '请选择章节';
+			flag = 1;
+		} else if ($scope.size > 1) {
+			$scope.text = '文件过大';
 			flag = 1;
 		}
 
@@ -80,7 +98,7 @@ app.controller('text', function ($scope, $rootScope) {
 			Sselect: $('#Sselect').val(),
 			section: $('#section').val(),
 			mark: $('#mark').val(),
-			wenjian: $('#wenjian').attr('href'),
+			wenjian: $scope.file.url,
 			time: $('#time').val(),
 			creatdate: creatdate,
 			fileName: $('#wenjian').html()

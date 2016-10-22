@@ -84,10 +84,14 @@ _rotr.apis.search = function () {
 	var co = $co(function* () {
 		var value = ctx.query.value || ctx.request.body.value;
 		var sqlstr = "SELECT w.wid,w.title,c.`name` from work_info w LEFT JOIN course_info c ON c.cid=w.cid  WHERE w.title LIKE '%" + value + "%' OR c.`name` LIKE '%" + value + "%'";
-		var paramat = [value, value];
 		var rows = yield _ctnu([_Mysql.conn, 'query'], sqlstr);
+
+		var sqlstr1 = "SELECT c.content, c.wid, u.nick FROM chat_info c LEFT JOIN user_info u ON c.userid = u.userid WHERE content LIKE '%" + value + "%'";
+		var rows1 = yield _ctnu([_Mysql.conn, 'query'], sqlstr1);
+
 		var dat = {
-			work: rows
+			work: rows,
+			chat: rows1
 		}
 		ctx.body = __newMsg(1, 'ok', dat);
 		return ctx;
@@ -375,17 +379,20 @@ _rotr.apis.hwrespage = function () {
 	var ctx = this;
 	var co = $co(function* () {
 		var page = ctx.query.page || ctx.request.body.page;
-		var sqlstr = "SELECT COUNT(*) as number FROM work_info";
-		var rows = yield _ctnu([_Mysql.conn, 'query'], sqlstr);
-		var changdu = parseInt(rows[0]['number']);
-
-
+		var Msg = ctx.query.Msg || ctx.request.body.Msg;
 		var last = 10 * page;
-
-
-		var sqlstr1 = "SELECT w.wid,w.title,c.`name` as cname,u.`nick` as uname,w.creatdate FROM work_info w LEFT JOIN course_info c ON w.cid=c.cid LEFT JOIN user_info u ON w.userid=u.userid order by creatdate desc LIMIT 0," + last
+		var sqlstr;
+		var sqlstr1;
+		if (!Msg) {
+			sqlstr = "SELECT COUNT( * ) as number FROM work_info";
+			sqlstr1 = "SELECT w.wid,w.title,c.`name` as cname,u.`nick` as uname,w.creatdate FROM work_info w LEFT JOIN course_info c ON w.cid=c.cid LEFT JOIN user_info u ON w.userid=u.userid order by creatdate desc LIMIT 0," + last;
+		} else {
+			sqlstr = "SELECT COUNT( * ) as number FROM work_info w LEFT JOIN course_info c ON w.cid=c.cid  WHERE w.title LIKE '%" + Msg + "%' OR c.`name` LIKE '%" + Msg + "%'";
+			sqlstr1 = "SELECT w.wid,w.title,c.`name` as cname,u.`nick` as uname,w.creatdate FROM work_info w LEFT JOIN course_info c ON w.cid=c.cid LEFT JOIN user_info u ON w.userid=u.userid WHERE w.title LIKE '%"+Msg+"%' OR c.`name` LIKE '%"+Msg+"%' order by creatdate desc LIMIT 0,"+last;
+		}
+		var rows = yield _ctnu([_Mysql.conn, 'query'], sqlstr);
 		var rows1 = yield _ctnu([_Mysql.conn, 'query'], sqlstr1);
-
+		var changdu = parseInt(rows[0]['number']);
 		var dat = {
 			changdu: changdu,
 			rows: rows1
@@ -456,7 +463,7 @@ _rotr.apis.updateSwork = function () {
 		var serianumber = ctx.query.serianumber || ctx.request.body.serianumber;
 		var answer = ctx.query.answer || ctx.request.body.answer;
 		if (!answer) throw Error('答案不可为空')
-		var annex = ctx.query.wenjian || ctx.request.body.wenjian;
+		var annex = ctx.query.annex || ctx.request.body.annex;
 		var update = ctx.query.update || ctx.request.body.update;
 		var wid = ctx.query.wid || ctx.request.body.wid;
 		var filename = ctx.query.fileName || ctx.request.body.fileName;
@@ -777,7 +784,7 @@ _rotr.apis.openChat = function () {
 		var userid = ctx.query.userid || ctx.request.body.userid;
 		var wid = ctx.query.wid || ctx.request.body.wid;
 		var sqlstr = 'select * from chat_info INNER JOIN' +
-			'(select userid userid1,nick from user_info) A1 where ' +
+			'(select userid userid1,nick,img from user_info) A1 where ' +
 			' chat_info.userid=A1.userid1 and wid=? order by creatdate desc;';
 		//var parament=[userid,content,wid];//userid,评论，wid
 		var parament = [wid]; //wid

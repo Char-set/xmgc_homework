@@ -155,14 +155,27 @@ app.controller("rolecontroller", function ($scope) {
 
 $(function () {
 	$("#giveUp").click(function () {
-		$("#searchPage").animate({
-			left: "100%"
+		$('#mainPage').fadeIn(100, function () {
+			$("#searchPage").animate({
+				left: "100%"
+			}, function () {
+				$('#searchPage').css({
+					display: 'none',
+					left: 0
+				})
+			});
 		})
 	});
 	$('#search').click(function () {
-		$('#searchPage').animate({
-			left: 0
+		console.log("gaodu", window.screen.availHeight)
+		$('#searchPage').fadeIn(function () {
+			$('#mainPage').css({
+				display: 'none'
+			})
 		})
+	})
+	$('#searchPage').css({
+		minHeight: window.screen.availHeight
 	})
 })
 
@@ -174,16 +187,33 @@ app.controller("searchPageController", function ($scope) {
 			value: $("#searchInput").val()
 		};
 		$.get('/homework/api/search', dat, function (res) {
-			console.log("返回值：", res.data.work);
-			var result = res.data.work;
-			if (result.length == 0) {
+			console.log("返回值：", res.data.chat);
+			var work = res.data.work;
+			var chat = res.data.chat;
+			if (work.length == 0 && chat.length == 0) {
 				$("#noresult").show();
 				$("#result").hide();
+			} else if (work.length == 0) {
+				$("#noresult").hide();
+				$("#result").show();
+				$("#work").hide();
+				$("#chat").show();
+				$scope.chatResult = chat;
+			} else if (chat.length == 0) {
+				$("#noresult").hide();
+				$("#result").show();
+				$("#work").show();
+				$("#chat").hide();
+				$scope.workResult = work;
 			} else {
 				$("#noresult").hide();
 				$("#result").show();
-				$scope.searchResult = result;
+				$("#work").show();
+				$("#chat").show();
+				$scope.workResult = work;
+				$scope.chatResult = chat;
 			}
+			$scope.$apply();
 		})
 	}
 })

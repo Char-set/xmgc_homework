@@ -80,7 +80,7 @@ app.controller('swiperControlle', function ($scope, $rootScope) {
 				//				})
 			})
 			$scope.shangchuan = function () {
-				_fns.uploadFile2($('#shangchuan'), function (f) {
+				_fns.uploadFile2(2, $('#shangchuan'), function (f) {
 					console.log('>>>>before:', f);
 				}, function (f) {
 

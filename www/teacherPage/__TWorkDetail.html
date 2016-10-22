@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="" ng-app='app'>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+	<title></title>
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+	<link href="//cdn.bootcss.com/Swiper/3.3.1/css/swiper.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/__TWorkDetail.css">
+	<style>
+
+	</style>
+</head>
+
+<body ng-controller="swiperController">
+	<div id='bg' style="position:fixed;height:100%;width:100%;z-index:-1;background: url('images/blli.jpg') no-repeat;background-size: 100%;"></div>
+	<div class="container">
+		<nav class="nav navbar" style="position: fixed;background-color:#bde5ef;width:100%;left:0;z-index:50">
+			<span id="pull" style="color:white;margin-left:10px;" class="glyphicon glyphicon-align-justify"></span>
+			<h4 style="color: white;display:inline-block;">作业详情</h4>
+		</nav>
+
+		<div class="row" style="position:fixed;width:100%;background-color:#bde5ef;z-index:49;left: 0px;margin-left: 0px;">
+
+			<ul class="nav nav-pills" role="tablist" style="margin-top:50px;">
+				<li ng-click='change(0)' id='wd' role="presentation" style="margin-left:10%;margin-right:5
+                %;" class="active"><a role="tab" data-toggle="tab">作业详情</a></li>
+				<li ng-click='change(1)' id='we' role="presentation" style="margin-left:5%;margin-right:5
+                %;"><a role="tab" data-toggle="tab">学生作业</a></li>
+				<li ng-click='change(2)' id='wc' role="presentation" style="margin-left:5%;margin-right:10
+                %;"><a role="tab" data-toggle="tab">作业讨论区</a></li>
+			</ul>
+		</div>
+		<div class="swiper-container" style="top:100px;height:100%;">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide" style="">
+					<article style="margin-top:0;">
+						<div class="panel panel-default1" id="mypanel">
+							<div class="panel-body">
+								<p ng-bind="workinfo.content"></p>
+							</div>
+							<ul class="list-group">
+								<li class="list-group-item">课程章节：<span ng-bind="workinfo.cname"></span> 第 <span ng-bind="workinfo.section"></span> 章</li>
+								<li class="list-group-item">发布人&nbsp;&nbsp;&nbsp;：<span ng-bind="workinfo.xname"></span></li>
+								<li class="list-group-item">发布时间：<span ng-bind="workinfo.creatdate"></span></li>
+								<li class="list-group-item">截止提交：<span ng-bind="workinfo.enddate"></span></li>
+								<li class="list-group-item" id="annex" ng-click="view()">附件：
+									<span style="color:black"><span class="glyphicon glyphicon-file">{{workinfo.filename}}</span></span>
+								</li>
+								<li class="list-group-item">备注：<span ng-bind="workinfo.mark"></span></li>
+							</ul>
+						</div>
+
+
+
+
+						<button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#myModal">
+							更新作业
+						</button>
+						<button class="btn btn-danger pull-right" ng-click='delete()' style="margin-right:10px;">删除作业</button>
+
+						<!-- Modal -->
+
+
+
+					</article>
+
+				</div>
+				<div class="swiper-slide" style="">
+					<div class="container" style="width:94%;background-color:rgba(255,255,255,0.2);margin-top: 0;position: releative;z-index: 50;font-size:13px;">
+						<h5 style="float:left;color:white;">学生提交情况：</h5>
+						<table class="table text-center" style="color:white;overflow: hidden;white-space: nowrap;text-overflow: clip;">
+							<col style="width: 25%" />
+							<col style="width: 25%" />
+							<col style="width: 30%" />
+							<col style="width: 20%" />
+							<thead>
+								<tr>
+									<td>题目名称</td>
+									<td>提交者</td>
+									<td>提交时间</td>
+									<td>操作</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="(k,v) in workinfo1">
+									<td ng-bind="v.title"></td>
+									<td>
+										<div style="width:50px;" ng-bind="v.nick">小煞笔</div>
+									</td>
+									<td ng-bind="v.cretdate">2016-09-22</td>
+									<td>
+										<a href="TCheck.html?serianumber={{v.serianumber}}">
+											<div class="bnt btn-info btn-xs text-center checkIt" style="color:white;" ng-bind='v.text'></div>
+										</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="swiper-slide" style="">
+					<img src="images/noInfo2.gif" id="none" style="width:100%;margin:0 auto;position: fixed;display:none;" />
+					<div id="wrapper" style='margin-bottom:50px;'>
+						<ul style="list-style:none;padding-left:0;">
+							<li ng-repeat="(key,val) in obj" ng-click="back()" style="color:white;margin-bottom:10px;{{val.bg}};min-height:65px;word-break:break-all">
+								<p class="story_t" style="color:white;font-size:12px;">
+									<span ng-bind='val.nick'></span>:
+
+									<span style="float:right" class="{{val.chatid}}"><span ng-bind='val.timbs'></span></span>
+									<span class="glyphicon glyphicon-thumbs-up {{val.chatid}}" style="float:right;" ng-click="timbs()"></span>
+								</p>
+
+
+
+								<p class="story_m" style="color:white;text-indent:15px;font-size:15px;"><span ng-bind='val.content'></span></p>
+								<p class="text-right" style="font-size:12px;"><span class="story_time" ng-bind='val.creatdate | date:"yyyy-MM-dd HH:mm:ss"'></span></p>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id='addChat' class="row" style="position:fixed;left:0;right:0;bottom:0;height:35px;background:#104766;z-index:20;display:none;">
+			&nbsp; <span id="icon" class="glyphicon glyphicon-pencil col-xs-1" style="color:#e5e5e5;margin-left:10px;margin-top:10px;"></span>
+			<input class="col-xs-8" type="text" placeholder='我想说...' id="chat" style='padding-left:5px;outline:none;padding:0;color:white;background-color:rgba(255,255,255,0);border-left:0px;border-top:0px;border-right:0px;border-bottom:1px solid white;margin-top:10px;'>
+			<span class="btn btn-default col-xs-2" style="margin-top:10px;color:white;background-color:rgba(255,255,255,0.2);padding:0;margin-left:5px;" ng-click="fabu()">发布</span>
+		</div>
+	</div>
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<h4 class="modal-title" id="myModalLabel">更新作业</h4>
+				</div>
+				<div class="modal-body">
+					<form role="form">
+						<div class="form-group">
+							<label for="title" class="title">标题</label>
+							<input value='{{workinfo.title}}' type="text" class="form-control" id="title" placeholder="Enter title">
+						</div>
+						<div class="form-group">
+							<label for="content" class="title">内容</label>
+							<textarea class="form-control" id="content" placeholder="Content" style="height:150px;width:100%;resize:none">{{workinfo.content}}</textarea>
+						</div>
+						<div class="form-group">
+							<label for="" class="title">课程</label>
+							<select class="form-control" style="text-align:center" name="" id="Sselect">
+								<option id='option' value="{{workinfo.cname}}" class="">{{workinfo.cname}}</option>
+								<option ng-repeat="class in classes" value="{{class.name}}" class="">{{class.name}}</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="" class="title">章节</label>
+							<select class="form-control" name="" id="section">
+								<option value="{{workinfo.section}}" class="active">{{workinfo.section}}</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="" class="title">截止时间</label>
+							<br>
+							<input value='{{workinfo.enddate}}' type="date" id="time" style="">
+						</div>
+						<div class="form-group">
+							<label for="mark" class="title">备注</label>
+							<input value="{{workinfo.mark}}" type="text" class="form-control" id="mark" placeholder="Some message">
+						</div>
+
+						<div class="form-group">
+							<label for="shangchuan" class="title">附件:</label>&nbsp;
+							<a id='wenjian' href='{{workinfo.annex}}'>{{workinfo.filename}}</a>
+							<div id='shangchuan' class="btn btn-primary pull-right btn-xs" ng-click='shangchuan()'>更新文件</div>
+						</div>
+
+					</form>
+				</div>
+				<div class="modal-footer">
+					<div ng-click='update()' class="btn btn-primary pull-right" style="margin-bottom:15px;">
+						<span>更新</span>
+					</div>
+					<button type="button" class="btn btn-danger pull-right" style="margin-right:50px" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" style="height:100%;">
+			<div class="modal-content" style="height:90%;">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true" style="margin-right:20px;">&times;</span><span class="sr-only">Close</span></button>
+
+				<iframe id="view" style="border:none;" width="100%" height="90%" src="" class="modal-body"></iframe>
+			</div>
+		</div>
+	</div>
+	<div style="position:fixed;z-index:150" ng-include="$root.navurl"></div>
+	<div style="width:100%;" ng-include='$root.alerturl'></div>
+
+	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<script src="//cdn.bootcss.com/angular.js/1.5.8/angular.min.js"></script>
+	<script src="//cdn.bootcss.com/angular-ui-bootstrap/0.13.3/ui-bootstrap-tpls.min.js"></script>
+	<script src="//cdn.bootcss.com/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
+	<script src="js/dropload.js"></script>
+	<script src="js/common.js"></script>
+	<script src="js/check.js"></script>
+	<script src="js/__TWorkDetail.js"></script>
+</body>
+
+</html>

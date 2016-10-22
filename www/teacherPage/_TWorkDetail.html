@@ -132,7 +132,7 @@
     </style>
 </head>
 
-<body ng-controller="swiperControlle">
+<body ng-controller="swiperController">
     <div id='bg' style="position:fixed;height:100%;width:100%;z-index:-1;background: url('images/blli.jpg') no-repeat;background-size: 100%;"></div>
     <div class="container">
         <nav class="nav navbar" style="position: fixed;background-color:#bde5ef;width:100%;left:0;z-index:50">
@@ -164,86 +164,30 @@
                                 <li class="list-group-item">发布人&nbsp;&nbsp;&nbsp;：<span ng-bind="workinfo.xname"></span></li>
                                 <li class="list-group-item">发布时间：<span ng-bind="workinfo.creatdate"></span></li>
                                 <li class="list-group-item">截止提交：<span ng-bind="workinfo.enddate"></span></li>
-                                <li class="list-group-item" id="annex">附件：
-                                    <a href="{{workinfo.annex}}"><span class="glyphicon glyphicon-file">{{workinfo.filename}}</span></a>
+                                <li class="list-group-item" id="annex" ng-click="view()">附件：
+                                    <span style="color:black"><span class="glyphicon glyphicon-file">{{workinfo.filename}}</span></span>
                                 </li>
                                 <li class="list-group-item">备注：<span ng-bind="workinfo.mark"></span></li>
                             </ul>
                         </div>
+
+
+
+
                         <button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#myModal">
                             更新作业
                         </button>
                         <button class="btn btn-danger pull-right" ng-click='delete()' style="margin-right:10px;">删除作业</button>
 
                         <!-- Modal -->
-                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                        <h4 class="modal-title" id="myModalLabel">更新作业</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form role="form">
-                                            <div class="form-group">
-                                                <label for="title" class="title">标题</label>
-                                                <input value='{{workinfo.title}}' type="text" class="form-control" id="title" placeholder="Enter title">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="content" class="title">内容</label>
-                                                <textarea class="form-control" id="content" placeholder="Content" style="height:150px;width:100%;resize:none">{{workinfo.content}}</textarea>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="" class="title">课程</label>
-                                                <select class="form-control" style="text-align:center" name="" id="Sselect">
-                                                    <option id='option' value="{{workinfo.cname}}" class="">{{workinfo.cname}}</option>
-                                                    <option ng-repeat="class in classes" value="{{class.name}}" class="">{{class.name}}</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="" class="title">章节</label>
-                                                <select class="form-control" name="" id="section">
-                                                    <option value="{{workinfo.section}}" class="active">{{workinfo.section}}</option>
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="" class="title">截止时间</label>
-                                                <br>
-                                                <input value='{{workinfo.enddate}}' type="date" id="time" style="">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="mark" class="title">备注</label>
-                                                <input value="{{workinfo.mark}}" type="text" class="form-control" id="mark" placeholder="Some message">
-                                            </div>
 
-                                            <div class="form-group">
-                                                <label for="shangchuan" class="title">附件:</label>&nbsp;
-                                                <a id='wenjian' href='{{workinfo.annex}}'>{{workinfo.filename}}</a>
-                                                <div id='shangchuan' class="btn btn-primary pull-right btn-xs" ng-click='shangchuan()'>更新文件</div>
-                                            </div>
-
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <div ng-click='update()' class="btn btn-primary pull-right" style="margin-bottom:15px;">
-                                            <span>更新</span>
-                                        </div>
-                                        <button type="button" class="btn btn-danger pull-right" style="margin-right:50px" data-dismiss="modal">取消</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
 
                     </article>
+
                 </div>
                 <div class="swiper-slide" style="">
-                    <div class="container" style="width:94%;background-color:rgba(255,255,255,0.6);margin-top: 0;position: releative;z-index: 50;font-size:13px;">
+                    <div class="container" style="width:94%;background-color:rgba(255,255,255,0.2);margin-top: 0;position: releative;z-index: 50;font-size:13px;">
                         <h5 style="float:left;color:white;">学生提交情况：</h5>
                         <table class="table text-center" style="color:white;overflow: hidden;white-space: nowrap;text-overflow: clip;">
                             <col style="width: 25%" />
@@ -299,9 +243,79 @@
             <span class="btn btn-default col-xs-2" style="margin-top:10px;color:white;background-color:rgba(255,255,255,0.2);padding:0;margin-left:5px;" ng-click="fabu()">发布</span>
         </div>
     </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">更新作业</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form">
+                        <div class="form-group">
+                            <label for="title" class="title">标题</label>
+                            <input value='{{workinfo.title}}' type="text" class="form-control" id="title" placeholder="Enter title">
+                        </div>
+                        <div class="form-group">
+                            <label for="content" class="title">内容</label>
+                            <textarea class="form-control" id="content" placeholder="Content" style="height:150px;width:100%;resize:none">{{workinfo.content}}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="title">课程</label>
+                            <select class="form-control" style="text-align:center" name="" id="Sselect">
+                                <option id='option' value="{{workinfo.cname}}" class="">{{workinfo.cname}}</option>
+                                <option ng-repeat="class in classes" value="{{class.name}}" class="">{{class.name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="title">章节</label>
+                            <select class="form-control" name="" id="section">
+                                <option value="{{workinfo.section}}" class="active">{{workinfo.section}}</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="title">截止时间</label>
+                            <br>
+                            <input value='{{workinfo.enddate}}' type="date" id="time" style="">
+                        </div>
+                        <div class="form-group">
+                            <label for="mark" class="title">备注</label>
+                            <input value="{{workinfo.mark}}" type="text" class="form-control" id="mark" placeholder="Some message">
+                        </div>
 
+                        <div class="form-group">
+                            <label for="shangchuan" class="title">附件:</label>&nbsp;
+                            <a id='wenjian' href='{{workinfo.annex}}'>{{workinfo.filename}}</a>
+                            <div id='shangchuan' class="btn btn-primary pull-right btn-xs" ng-click='shangchuan()'>更新文件</div>
+                        </div>
 
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div ng-click='update()' class="btn btn-primary pull-right" style="margin-bottom:15px;">
+                        <span>更新</span>
+                    </div>
+                    <button type="button" class="btn btn-danger pull-right" style="margin-right:50px" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="height:100%;">
+            <div class="modal-content" style="height:90%;">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true" style="margin-right:20px;">&times;</span><span class="sr-only">Close</span></button>
+
+                <iframe id="view" style="border:none;" width="100%" height="90%" src="" class="modal-body"></iframe>
+            </div>
+        </div>
+    </div>
     <div style="position:fixed;z-index:150" ng-include="$root.navurl"></div>
     <div style="width:100%;" ng-include='$root.alerturl'></div>
 

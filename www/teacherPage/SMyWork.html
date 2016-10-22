@@ -7,8 +7,6 @@
 	<title>HTML作业</title>
 	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/SMyWork.css">
-
-
 	<style>
 		* {
 			font-family: "微软雅黑";
@@ -39,7 +37,7 @@
 		</div>
 
 
-		<ul class="list-group worklist" style="list-style: none;">
+		<ul class="list-group worklist" style="list-style: none;" ng-if='dat.length!=0'>
 			<li>
 				<p>作业标题</p>
 				<p>课程</p>
@@ -47,33 +45,16 @@
 			</li>
 			<a ng-repeat='(key,val) in dat |filter:query |orderBy:"-enddate"' href="./__SWorkDetail.html?wid={{val.wid}}">
 				<li>
-					<p style="overflow:hidden;">{{val.title}}</p>
-					<p>{{val.name}}</p>
-					<p>{{val.enddate}}</p>
+					<p ng-bind="val.title" style="overflow:hidden;"></p>
+					<p ng-bind="val.name"></p>
+					<p ng-bind="val.enddate"></p>
 				</li>
 			</a>
 		</ul>
-
-
-
-
-
-
-
-
-
-
+		<div ng-if='dat.length==0' style="width:100%;text-align:center;margin-top:15px;color:white;">还没有属于你的作业哦~~</div>
 	</div>
 	<div style="position:fixed;z-index:150 " ng-include="$root.navurl "></div>
-
-	<!--<nav class="_nav navbar navbar-fixed-bottom " style="margin-bottom: 0 ">底部导航</nav>-->
-
-
-
-	<!--&lt;!&ndash; jQuery文件。务必在bootstrap.min.js 之前引入 &ndash;&gt;-->
 	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js "></script>
-
-	<!--&lt;!&ndash; 最新的 Bootstrap 核心 JavaScript 文件 &ndash;&gt;-->
 	<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js "></script>
 	<script src="//cdn.bootcss.com/angular.js/1.5.8/angular.min.js"></script>
 	<script src="//cdn.bootcss.com/angular-ui-bootstrap/0.13.3/ui-bootstrap-tpls.min.js "></script>
